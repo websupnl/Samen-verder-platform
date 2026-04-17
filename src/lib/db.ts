@@ -5,8 +5,7 @@ const getSql = () => {
   const url = process.env.DATABASE_URL;
   if (!url) {
     console.warn('DATABASE_URL is not set. Database operations will fail.');
-    // Return a dummy function or throw later
-    return ((strings: TemplateStringsArray, ...values: any[]) => {
+    return ((strings: any, ...values: any[]) => {
       throw new Error('DATABASE_URL is not set');
     }) as any;
   }
@@ -15,6 +14,10 @@ const getSql = () => {
 
 const _sql = getSql();
 
+/**
+ * A wrapper around neon's sql that adds auto-initialization of the database
+ * if a table is missing.
+ */
 export const sql = (async (strings: any, ...values: any[]) => {
   try {
     // If it's a tagged template literal
@@ -22,9 +25,13 @@ export const sql = (async (strings: any, ...values: any[]) => {
       return await _sql(strings as any, ...values);
     }
     // If it's a plain string query
-    return await _sql(strings, values);
+    return await _sql(strings, values[0]);
   } catch (error: any) {
-    if (error.code === '42P01') { // undefined_table
+    const isTableMissing = 
+      error.code === '42P01' || 
+      (error.message && error.message.includes('does not exist'));
+
+    if (isTableMissing) {
       console.log('Table missing, attempting auto-initialization...');
       try {
         await initializeDatabase();
@@ -32,7 +39,7 @@ export const sql = (async (strings: any, ...values: any[]) => {
         if (Array.isArray(strings) && (strings as any).raw) {
           return await _sql(strings as any, ...values);
         }
-        return await _sql(strings, values);
+        return await _sql(strings, values[0]);
       } catch (initError) {
         console.error('Auto-initialization failed:', initError);
         throw error; // Throw the original error
@@ -46,9 +53,12 @@ export async function initializeDatabase() {
   console.log('Initializing database schema...');
   try {
     // Split the schema SQL by semicolons and execute each statement
-    // Note: This is a simple splitter and might fail on complex SQL, but works for our schema
-    const statements = SCHEMA_SQL.split(';').filter(stmt => stmt.trim() !== '');
+    const statements = SCHEMA_SQL.split(';')
+      .map(stmt => stmt.trim())
+      .filter(stmt => stmt !== '');
+    
     for (const statement of statements) {
+      console.log(`Executing: ${statement.substring(0, 50)}...`);
       await _sql(statement);
     }
     console.log('Database schema initialized successfully!');
