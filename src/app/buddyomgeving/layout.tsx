@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/Button";
 import { 
   LayoutDashboard, 
@@ -9,12 +12,23 @@ import {
   ClipboardList,
   GraduationCap
 } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export default function BuddyLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const pathname = usePathname();
+
+  const navItems = [
+    { href: "/buddyomgeving", label: "Dashboard", icon: LayoutDashboard },
+    { href: "/buddyomgeving/berichten", label: "Berichten", icon: MessageSquare },
+    { href: "/buddyomgeving/matches", label: "Mijn Matches", icon: Users },
+    { href: "/buddyomgeving/rapportage", label: "Rapportage", icon: ClipboardList },
+    { href: "/buddyomgeving/trainingen", label: "Trainingen", icon: GraduationCap },
+  ];
+
   return (
     <div className="flex min-h-screen bg-sage-50/50">
       {/* Sidebar */}
@@ -32,30 +46,36 @@ export default function BuddyLayout({
         </div>
         
         <nav className="flex-1 px-4 space-y-1">
-          <Link href="/buddyomgeving" className="flex items-center space-x-3 px-3 py-2 text-sm font-medium text-primary bg-sage-50 rounded-xl">
-            <LayoutDashboard className="h-5 w-5" />
-            <span>Dashboard</span>
-          </Link>
-          <Link href="/buddyomgeving/berichten" className="flex items-center space-x-3 px-3 py-2 text-sm font-medium text-sage-600 hover:text-primary hover:bg-sage-50 rounded-xl transition-colors">
-            <MessageSquare className="h-5 w-5" />
-            <span>Berichten</span>
-          </Link>
-          <Link href="/buddyomgeving/matches" className="flex items-center space-x-3 px-3 py-2 text-sm font-medium text-sage-600 hover:text-primary hover:bg-sage-50 rounded-xl transition-colors">
-            <Users className="h-5 w-5" />
-            <span>Mijn Matches</span>
-          </Link>
-          <Link href="/buddyomgeving/rapportage" className="flex items-center space-x-3 px-3 py-2 text-sm font-medium text-sage-600 hover:text-primary hover:bg-sage-50 rounded-xl transition-colors">
-            <ClipboardList className="h-5 w-5" />
-            <span>Rapportage</span>
-          </Link>
-          <Link href="/buddyomgeving/trainingen" className="flex items-center space-x-3 px-3 py-2 text-sm font-medium text-sage-600 hover:text-primary hover:bg-sage-50 rounded-xl transition-colors">
-            <GraduationCap className="h-5 w-5" />
-            <span>Trainingen</span>
-          </Link>
+          {navItems.map((item) => {
+            const isActive = pathname === item.href;
+            return (
+              <Link 
+                key={item.href}
+                href={item.href} 
+                className={cn(
+                  "flex items-center space-x-3 px-3 py-2 text-sm font-medium rounded-xl transition-colors",
+                  isActive 
+                    ? "text-primary bg-sage-50" 
+                    : "text-sage-600 hover:text-primary hover:bg-sage-50"
+                )}
+              >
+                <item.icon className="h-5 w-5" />
+                <span>{item.label}</span>
+              </Link>
+            );
+          })}
         </nav>
 
         <div className="p-4 border-t border-sage-100 space-y-1">
-          <Link href="/buddyomgeving/instellingen" className="flex items-center space-x-3 px-3 py-2 text-sm font-medium text-sage-600 hover:text-primary hover:bg-sage-50 rounded-xl transition-colors">
+          <Link 
+            href="/buddyomgeving/instellingen" 
+            className={cn(
+              "flex items-center space-x-3 px-3 py-2 text-sm font-medium rounded-xl transition-colors",
+              pathname === "/buddyomgeving/instellingen"
+                ? "text-primary bg-sage-50"
+                : "text-sage-600 hover:text-primary hover:bg-sage-50"
+            )}
+          >
             <Settings className="h-5 w-5" />
             <span>Instellingen</span>
           </Link>
