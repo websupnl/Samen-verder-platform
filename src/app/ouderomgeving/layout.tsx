@@ -90,9 +90,11 @@ export default function OuderLayout({
             <Settings className="h-5 w-5" />
             <span>Instellingen</span>
           </Link>
-          <Button variant="ghost" className="w-full justify-start text-red-600 hover:text-red-700 hover:bg-red-50 rounded-xl mt-4">
-            <LogOut className="h-5 w-5 mr-3" />
-            <span>Uitloggen</span>
+          <Button asChild variant="ghost" className="w-full justify-start text-red-600 hover:text-red-700 hover:bg-red-50 rounded-xl mt-4">
+            <Link href="/">
+              <LogOut className="h-5 w-5 mr-3" />
+              <span>Uitloggen</span>
+            </Link>
           </Button>
         </div>
       </aside>

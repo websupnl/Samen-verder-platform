@@ -5,6 +5,7 @@ import { Send, X, MessageCircle, User, HeartHandshake, Sparkles } from 'lucide-r
 import { Button } from '@/components/ui/Button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
 import { motion, AnimatePresence } from 'framer-motion';
+import { isValidUUID } from '@/lib/utils';
 
 interface Message {
   id: string;
@@ -34,9 +35,12 @@ export function AnonymousChat() {
     // Generate or get session ID
     if (typeof window !== 'undefined') {
       const storedId = localStorage.getItem('chat_session_id');
-      if (storedId) {
+      if (storedId && isValidUUID(storedId)) {
         setSessionId(storedId);
       } else {
+        // Clear invalid ID if it exists
+        if (storedId) localStorage.removeItem('chat_session_id');
+
         // Create new session via API
         const initSession = async () => {
           try {

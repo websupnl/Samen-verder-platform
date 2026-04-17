@@ -4,6 +4,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { Send, User, Bot } from 'lucide-react';
+import { isValidUUID } from '@/lib/utils';
 
 interface Message {
   id: string;
@@ -30,9 +31,12 @@ export default function OuderBerichtenPage() {
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const storedId = localStorage.getItem('chat_session_id');
-      if (storedId) {
+      if (storedId && isValidUUID(storedId)) {
         setSessionId(storedId);
       } else {
+        // Clear invalid ID if it exists
+        if (storedId) localStorage.removeItem('chat_session_id');
+
         const initSession = async () => {
           try {
             const res = await fetch('/api/chat/sessions', { method: 'POST' });

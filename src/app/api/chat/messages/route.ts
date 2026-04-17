@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getMessages, addMessage } from '@/lib/chat-service';
 import { openai, SYSTEM_PROMPT } from '@/lib/openai';
+import { isValidUUID } from '@/lib/utils';
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
@@ -8,6 +9,10 @@ export async function GET(req: NextRequest) {
 
   if (!sessionId) {
     return NextResponse.json({ error: 'Session ID is required' }, { status: 400 });
+  }
+
+  if (!isValidUUID(sessionId)) {
+    return NextResponse.json({ error: 'Invalid Session ID format' }, { status: 400 });
   }
 
   try {
@@ -26,6 +31,10 @@ export async function POST(req: NextRequest) {
 
     if (!text || !senderType || !sessionId) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
+    }
+
+    if (!isValidUUID(sessionId)) {
+      return NextResponse.json({ error: 'Invalid Session ID format' }, { status: 400 });
     }
 
     // Save user message
