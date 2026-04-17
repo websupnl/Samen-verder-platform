@@ -13,13 +13,8 @@ export async function GET() {
 
 export async function POST(req: NextRequest) {
   try {
-    let userId = null;
-    try {
-      const body = await req.json();
-      userId = body?.userId;
-    } catch (e) {
-      // Ignore empty body
-    }
+    const body = await req.json();
+    const { userId } = body || {};
     const sessionId = await createSession(userId);
     return NextResponse.json({ sessionId });
   } catch (error) {

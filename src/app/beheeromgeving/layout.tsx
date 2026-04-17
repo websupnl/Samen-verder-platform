@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/Button";
 import { 
   BarChart3, 
@@ -9,53 +12,73 @@ import {
   FileText,
   Bell
 } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export default function BeheerLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const pathname = usePathname();
+
+  const navItems = [
+    { href: "/beheeromgeving", label: "Statistieken", icon: BarChart3 },
+    { href: "/beheeromgeving/gebruikers", label: "Gebruikers", icon: Users },
+    { href: "/beheeromgeving/matches", label: "Matches Beheren", icon: ShieldCheck },
+    { href: "/beheeromgeving/content", label: "CMS / Content", icon: FileText },
+  ];
+
   return (
-    <div className="flex min-h-screen bg-slate-50">
+    <div className="flex min-h-screen bg-sage-50/50">
       {/* Sidebar */}
-      <aside className="w-64 bg-slate-900 text-white flex flex-col">
+      <aside className="w-64 bg-white border-r border-sage-100 flex flex-col">
         <div className="p-6">
           <Link href="/" className="flex items-center space-x-2">
             <div className="h-8 w-8 rounded-lg bg-primary" />
-            <span className="text-xl font-bold tracking-tight">
+            <span className="text-xl font-bold tracking-tight text-sage-900">
               Samen Verder
             </span>
           </Link>
-          <div className="mt-2 text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+          <div className="mt-2 text-[10px] font-bold text-primary uppercase tracking-wider">
             Beheeromgeving
           </div>
         </div>
         
-        <nav className="flex-1 px-4 mt-4 space-y-1">
-          <Link href="/beheeromgeving" className="flex items-center space-x-3 px-3 py-2 text-sm font-medium text-white bg-white/10 rounded-xl transition-colors">
-            <BarChart3 className="h-5 w-5" />
-            <span>Statistieken</span>
-          </Link>
-          <Link href="/beheeromgeving/gebruikers" className="flex items-center space-x-3 px-3 py-2 text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 rounded-xl transition-colors">
-            <Users className="h-5 w-5" />
-            <span>Gebruikers</span>
-          </Link>
-          <Link href="/beheeromgeving/matches" className="flex items-center space-x-3 px-3 py-2 text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 rounded-xl transition-colors">
-            <ShieldCheck className="h-5 w-5" />
-            <span>Matches Beheren</span>
-          </Link>
-          <Link href="/beheeromgeving/content" className="flex items-center space-x-3 px-3 py-2 text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 rounded-xl transition-colors">
-            <FileText className="h-5 w-5" />
-            <span>CMS / Content</span>
-          </Link>
+        <nav className="flex-1 px-4 space-y-1">
+          {navItems.map((item) => {
+            const isActive = pathname === item.href;
+            return (
+              <Link 
+                key={item.href}
+                href={item.href} 
+                className={cn(
+                  "flex items-center space-x-3 px-3 py-2 text-sm font-medium rounded-xl transition-colors",
+                  isActive 
+                    ? "text-primary bg-sage-50" 
+                    : "text-sage-600 hover:text-primary hover:bg-sage-50"
+                )}
+              >
+                <item.icon className="h-5 w-5" />
+                <span>{item.label}</span>
+              </Link>
+            );
+          })}
         </nav>
 
-        <div className="p-4 border-t border-slate-800 space-y-1">
-          <Link href="/beheeromgeving/instellingen" className="flex items-center space-x-3 px-3 py-2 text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 rounded-xl transition-colors">
+        <div className="p-4 border-t border-sage-100 space-y-1">
+          <Link 
+            href="/beheeromgeving/instellingen" 
+            className={cn(
+              "flex items-center space-x-3 px-3 py-2 text-sm font-medium rounded-xl transition-colors",
+              pathname === "/beheeromgeving/instellingen"
+                ? "text-primary bg-sage-50"
+                : "text-sage-600 hover:text-primary hover:bg-sage-50"
+            )}
+          >
             <Settings className="h-5 w-5" />
             <span>Instellingen</span>
           </Link>
-          <Button variant="ghost" className="w-full justify-start text-slate-400 hover:text-white hover:bg-white/5 rounded-xl mt-4">
+          <Button variant="ghost" className="w-full justify-start text-red-600 hover:text-red-700 hover:bg-red-50 rounded-xl mt-4">
             <LogOut className="h-5 w-5 mr-3" />
             <span>Uitloggen</span>
           </Button>
@@ -64,14 +87,14 @@ export default function BeheerLayout({
 
       {/* Main Content */}
       <main className="flex-1 overflow-y-auto">
-        <header className="h-16 bg-white border-b border-slate-200 flex items-center justify-between px-8">
-          <h2 className="font-semibold text-slate-900">Admin Dashboard</h2>
+        <header className="h-16 bg-white border-b border-sage-100 flex items-center justify-between px-8">
+          <h2 className="font-semibold text-sage-900">Admin Dashboard</h2>
           <div className="flex items-center space-x-4">
-            <button className="p-2 text-slate-400 hover:text-slate-600 relative">
+            <button className="p-2 text-sage-400 hover:text-sage-600 relative">
               <Bell className="h-5 w-5" />
               <span className="absolute top-2 right-2 h-2 w-2 bg-red-500 rounded-full border-2 border-white"></span>
             </button>
-            <div className="h-8 w-8 rounded-full bg-slate-200" />
+            <div className="h-8 w-8 rounded-full bg-sage-200" />
           </div>
         </header>
         <div className="p-8">
