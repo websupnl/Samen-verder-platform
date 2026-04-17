@@ -51,15 +51,12 @@ export default function BuddyChatDetailPage() {
     e.preventDefault();
     if (!inputText.trim() || !sessionId) return;
 
-    const textToSend = inputText;
-    setInputText('');
-
     try {
       const res = await fetch('/api/chat/messages', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          text: textToSend,
+          text: inputText,
           senderType: 'buddy',
           sessionId
         }),
@@ -68,6 +65,7 @@ export default function BuddyChatDetailPage() {
       if (res.ok) {
         const savedMessage = await res.json();
         setMessages(prev => [...prev, savedMessage]);
+        setInputText('');
       }
     } catch (error) {
       console.error("Failed to send message", error);
@@ -90,7 +88,7 @@ export default function BuddyChatDetailPage() {
         </Button>
         <div>
           <h1 className="text-xl font-bold text-sage-900">Gesprek met Anonieme Ouder</h1>
-          <p className="text-xs text-sage-500">Sessie: {sessionId}</p>
+          <p className="text-xs text-sage-500">ID: {sessionId}</p>
         </div>
       </div>
 
@@ -109,21 +107,17 @@ export default function BuddyChatDetailPage() {
         </CardHeader>
         
         <CardContent className="flex-grow overflow-y-auto p-6 space-y-4">
-          <div className="bg-blue-50 border border-blue-100 p-4 rounded-xl text-sm text-blue-800 mb-6 font-medium">
+          <div className="bg-blue-50 border border-blue-100 p-4 rounded-xl text-sm text-blue-800 mb-6">
             <strong>Buddy-instructie:</strong> De AI heeft het eerste contact opgevangen. Je kunt nu het gesprek overnemen. De AI stopt met reageren zodra jij een bericht stuurt.
           </div>
 
-          {messages.length === 0 ? (
-             <div className="text-center py-12 text-sage-400 italic">
-               Nog geen berichten in dit gesprek.
-             </div>
-          ) : messages.map((m) => (
+          {messages.map((m) => (
             <div 
               key={m.id} 
               className={`flex ${m.sender_type === 'buddy' ? 'justify-end' : 'justify-start'}`}
             >
               <div 
-                className={`max-w-[75%] p-4 rounded-2xl text-sm shadow-sm ${
+                className={`max-w-[70%] p-3 rounded-2xl text-sm shadow-sm ${
                   m.sender_type === 'buddy' 
                     ? 'bg-primary text-white rounded-tr-none' 
                     : m.sender_type === 'ai'
@@ -140,8 +134,8 @@ export default function BuddyChatDetailPage() {
                     <><span>Ouder</span><User className="h-3 w-3" /></>
                   )}
                 </div>
-                <div className="whitespace-pre-wrap">{m.content}</div>
-                <div className="text-[9px] mt-2 text-right opacity-50">
+                {m.content}
+                <div className="text-[9px] mt-1 text-right opacity-50">
                   {new Date(m.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                 </div>
               </div>
@@ -151,23 +145,16 @@ export default function BuddyChatDetailPage() {
         </CardContent>
 
         <div className="p-4 bg-white border-t">
-          <form onSubmit={handleSendMessage} className="flex space-x-3">
-            <textarea
+          <form onSubmit={handleSendMessage} className="flex space-x-2">
+            <input
+              type="text"
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
               placeholder="Typ je reactie als buddy..."
-              rows={1}
-              className="flex-grow p-4 rounded-2xl bg-sage-50 border-none focus:ring-2 focus:ring-primary/20 text-sm outline-none resize-none transition-all focus:bg-white focus:shadow-inner"
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' && !e.shiftKey) {
-                  e.preventDefault();
-                  handleSendMessage(e as unknown as React.FormEvent);
-                }
-              }}
+              className="flex-grow p-3 rounded-xl bg-sage-50 border-none focus:ring-2 focus:ring-primary/20 text-sm outline-none"
             />
-            <Button type="submit" className="h-[52px] px-6 rounded-2xl bg-primary hover:bg-primary-dim self-end">
-              <Send className="h-5 w-5 mr-2" />
-              Verstuur
+            <Button type="submit" size="icon" className="h-11 w-11 rounded-xl bg-primary">
+              <Send className="h-5 w-5" />
             </Button>
           </form>
         </div>
