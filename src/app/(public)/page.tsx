@@ -81,7 +81,7 @@ export default function Home() {
               <Image
                 alt="Ondersteunend gesprek in een warme, rustige omgeving"
                 className="absolute inset-0 w-full h-full object-cover"
-                src="/images/Hero home.png"
+                src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&q=80&w=1000"
                 fill
                 priority
                 sizes="(max-width: 1024px) 100vw, 50vw"
@@ -236,7 +236,7 @@ export default function Home() {
               <Image
                 alt="Subtiele abstracte illustratie over steun en verbinding"
                 className="absolute inset-0 w-full h-full object-cover"
-                src="/images/wat is een buddy sectie home.png"
+                src="https://images.unsplash.com/photo-1516307361425-44d38feef221?auto=format&fit=crop&q=80&w=1000"
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />
@@ -366,7 +366,7 @@ export default function Home() {
                <Image
                 alt="Ouder aan tafel met papieren in een rustige setting"
                 className="absolute inset-0 w-full h-full object-cover"
-                src="/images/uithuis plaatsing home cta.png"
+                src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&q=80&w=1000"
                 fill
                 sizes="50vw"
               />
