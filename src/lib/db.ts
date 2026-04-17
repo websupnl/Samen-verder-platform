@@ -22,7 +22,7 @@ export const sql = (async (strings: any, ...values: any[]) => {
       return await _sql(strings as any, ...values);
     }
     // If it's a plain string query
-    return await _sql.query(strings, values);
+    return await _sql(strings, ...values);
   } catch (error: any) {
     if (error.code === '42P01') { // undefined_table
       console.log('Table missing, attempting auto-initialization...');
@@ -32,7 +32,7 @@ export const sql = (async (strings: any, ...values: any[]) => {
         if (Array.isArray(strings) && (strings as any).raw) {
           return await _sql(strings as any, ...values);
         }
-        return await _sql.query(strings, values);
+        return await _sql(strings, ...values);
       } catch (initError) {
         console.error('Auto-initialization failed:', initError);
         throw error; // Throw the original error
@@ -49,7 +49,7 @@ export async function initializeDatabase() {
     // Note: This is a simple splitter and might fail on complex SQL, but works for our schema
     const statements = SCHEMA_SQL.split(';').filter(stmt => stmt.trim() !== '');
     for (const statement of statements) {
-      await _sql.query(statement);
+      await _sql(statement);
     }
     console.log('Database schema initialized successfully!');
     return { success: true };
