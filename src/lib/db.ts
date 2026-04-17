@@ -1,4 +1,5 @@
 import { neon } from '@neondatabase/serverless';
+import { SCHEMA_SQL } from './db-schema';
 
 const getSql = () => {
   const url = process.env.DATABASE_URL;
@@ -12,7 +13,51 @@ const getSql = () => {
   return neon(url);
 };
 
-export const sql = getSql();
+const _sql = getSql();
+
+export const sql = (async (strings: any, ...values: any[]) => {
+  try {
+    // If it's a tagged template literal
+    if (Array.isArray(strings) && (strings as any).raw) {
+      return await _sql(strings as any, ...values);
+    }
+    // If it's a plain string query
+    return await _sql(strings, ...values);
+  } catch (error: any) {
+    if (error.code === '42P01') { // undefined_table
+      console.log('Table missing, attempting auto-initialization...');
+      try {
+        await initializeDatabase();
+        // Retry the original query
+        if (Array.isArray(strings) && (strings as any).raw) {
+          return await _sql(strings as any, ...values);
+        }
+        return await _sql(strings, ...values);
+      } catch (initError) {
+        console.error('Auto-initialization failed:', initError);
+        throw error; // Throw the original error
+      }
+    }
+    throw error;
+  }
+}) as any;
+
+export async function initializeDatabase() {
+  console.log('Initializing database schema...');
+  try {
+    // Split the schema SQL by semicolons and execute each statement
+    // Note: This is a simple splitter and might fail on complex SQL, but works for our schema
+    const statements = SCHEMA_SQL.split(';').filter(stmt => stmt.trim() !== '');
+    for (const statement of statements) {
+      await _sql(statement);
+    }
+    console.log('Database schema initialized successfully!');
+    return { success: true };
+  } catch (error) {
+    console.error('Failed to initialize database schema:', error);
+    throw error;
+  }
+}
 
 // Types for our database
 export type UserRole = 'ouder' | 'buddy' | 'beheerder';
