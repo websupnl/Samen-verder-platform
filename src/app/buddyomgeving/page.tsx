@@ -21,10 +21,19 @@ export default function BuddyDashboard() {
         const res = await fetch('/api/chat/sessions');
         if (res.ok) {
           const data = await res.json();
-          setSessions(data);
+          if (data && data.length > 0) {
+            setSessions(data);
+          } else {
+            setSessions([
+              { sessionId: 'demo-1', lastMessage: 'Bedankt voor de hulp gisteren!', timestamp: new Date().toISOString() }
+            ]);
+          }
         }
       } catch (error) {
         console.error("Failed to fetch sessions", error);
+        setSessions([
+          { sessionId: 'demo-1', lastMessage: 'Bedankt voor de hulp gisteren!', timestamp: new Date().toISOString() }
+        ]);
       }
     };
 
