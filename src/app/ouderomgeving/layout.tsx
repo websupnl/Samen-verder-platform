@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/Button";
 import { 
   LayoutDashboard, 
@@ -9,12 +12,22 @@ import {
   Heart,
   Calendar
 } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export default function OuderLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const pathname = usePathname();
+
+  const navItems = [
+    { href: "/ouderomgeving", label: "Dashboard", icon: LayoutDashboard },
+    { href: "/ouderomgeving/berichten", label: "Berichten", icon: MessageSquare },
+    { href: "/ouderomgeving/buddy", label: "Mijn Buddy", icon: Heart },
+    { href: "/ouderomgeving/agenda", label: "Agenda", icon: Calendar },
+  ];
+
   return (
     <div className="flex min-h-screen bg-sage-50/50">
       {/* Sidebar */}
@@ -32,30 +45,48 @@ export default function OuderLayout({
         </div>
         
         <nav className="flex-1 px-4 space-y-1">
-          <Link href="/ouderomgeving" className="flex items-center space-x-3 px-3 py-2 text-sm font-medium text-primary bg-sage-50 rounded-xl">
-            <LayoutDashboard className="h-5 w-5" />
-            <span>Dashboard</span>
-          </Link>
-          <Link href="/ouderomgeving/berichten" className="flex items-center space-x-3 px-3 py-2 text-sm font-medium text-sage-600 hover:text-primary hover:bg-sage-50 rounded-xl transition-colors">
-            <MessageSquare className="h-5 w-5" />
-            <span>Berichten</span>
-          </Link>
-          <Link href="/ouderomgeving/buddy" className="flex items-center space-x-3 px-3 py-2 text-sm font-medium text-sage-600 hover:text-primary hover:bg-sage-50 rounded-xl transition-colors">
-            <Heart className="h-5 w-5" />
-            <span>Mijn Buddy</span>
-          </Link>
-          <Link href="/ouderomgeving/agenda" className="flex items-center space-x-3 px-3 py-2 text-sm font-medium text-sage-600 hover:text-primary hover:bg-sage-50 rounded-xl transition-colors">
-            <Calendar className="h-5 w-5" />
-            <span>Agenda</span>
-          </Link>
+          {navItems.map((item) => {
+            const isActive = pathname === item.href;
+            return (
+              <Link 
+                key={item.href}
+                href={item.href} 
+                className={cn(
+                  "flex items-center space-x-3 px-3 py-2 text-sm font-medium rounded-xl transition-colors",
+                  isActive 
+                    ? "text-primary bg-sage-50" 
+                    : "text-sage-600 hover:text-primary hover:bg-sage-50"
+                )}
+              >
+                <item.icon className="h-5 w-5" />
+                <span>{item.label}</span>
+              </Link>
+            );
+          })}
         </nav>
 
         <div className="p-4 border-t border-sage-100 space-y-1">
-          <Link href="/ouderomgeving/profiel" className="flex items-center space-x-3 px-3 py-2 text-sm font-medium text-sage-600 hover:text-primary hover:bg-sage-50 rounded-xl transition-colors">
+          <Link 
+            href="/ouderomgeving/profiel" 
+            className={cn(
+              "flex items-center space-x-3 px-3 py-2 text-sm font-medium rounded-xl transition-colors",
+              pathname === "/ouderomgeving/profiel"
+                ? "text-primary bg-sage-50"
+                : "text-sage-600 hover:text-primary hover:bg-sage-50"
+            )}
+          >
             <User className="h-5 w-5" />
             <span>Profiel</span>
           </Link>
-          <Link href="/ouderomgeving/instellingen" className="flex items-center space-x-3 px-3 py-2 text-sm font-medium text-sage-600 hover:text-primary hover:bg-sage-50 rounded-xl transition-colors">
+          <Link 
+            href="/ouderomgeving/instellingen" 
+            className={cn(
+              "flex items-center space-x-3 px-3 py-2 text-sm font-medium rounded-xl transition-colors",
+              pathname === "/ouderomgeving/instellingen"
+                ? "text-primary bg-sage-50"
+                : "text-sage-600 hover:text-primary hover:bg-sage-50"
+            )}
+          >
             <Settings className="h-5 w-5" />
             <span>Instellingen</span>
           </Link>
