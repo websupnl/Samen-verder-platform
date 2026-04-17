@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/Button";
-import { Card, CardContent } from "@/components/ui/Card";
-import { Building2, ClipboardList, TrendingUp, Handshake } from "lucide-react";
+import { Building2, ClipboardList, TrendingUp } from "lucide-react";
 import Link from "next/link";
 
 export default function ProfessionalsPage() {

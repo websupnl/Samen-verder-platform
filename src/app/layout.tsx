@@ -17,6 +17,8 @@ export const metadata: Metadata = {
   description: "Je staat er niet alleen voor. Een ervaren buddy luistert zonder oordeel, helpt je overzicht te bewaren in moeilijke gesprekken en vertaalt ingewikkelde taal naar heldere stappen.",
 };
 
+import { AnonymousChat } from "@/components/shared/AnonymousChat";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -35,6 +37,7 @@ export default function RootLayout({
       </head>
       <body className="min-h-full flex flex-col font-body bg-background text-on-background">
         {children}
+        <AnonymousChat />
       </body>
     </html>
   );

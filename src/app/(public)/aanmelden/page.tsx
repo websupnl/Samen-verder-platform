@@ -113,7 +113,7 @@ export default function AanmeldenPage() {
             <Card className="bg-sage-50 border-none">
               <CardContent className="pt-6">
                 <p className="text-sm text-sage-600 italic">
-                  "Bedankt voor uw vertrouwen in Samen Verder. We nemen zo snel mogelijk contact met u op voor een kennismaking."
+                  &quot;Bedankt voor uw vertrouwen in Samen Verder. We nemen zo snel mogelijk contact met u op voor een kennismaking.&quot;
                 </p>
               </CardContent>
             </Card>
