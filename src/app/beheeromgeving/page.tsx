@@ -1,79 +1,62 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
-import { 
-  Users, 
-  UserPlus, 
-  CheckCircle, 
-  AlertCircle,
-  TrendingUp,
-  TrendingDown
-} from "lucide-react";
+import { Users, MessageSquare, Heart, ShieldCheck, TrendingUp } from "lucide-react";
 
 export default function BeheerDashboard() {
   const stats = [
-    { label: "Totaal Ouders", value: "142", change: "+12%", up: true, icon: Users },
-    { label: "Totaal Buddies", value: "89", change: "+5%", up: true, icon: UserPlus },
-    { label: "Actieve Matches", value: "64", change: "+18%", up: true, icon: CheckCircle },
-    { label: "Wachtlijst", value: "12", change: "-2%", up: false, icon: AlertCircle },
+    { label: "Totaal Ouders", value: "124", icon: Users, color: "text-blue-600" },
+    { label: "Actieve Buddy's", value: "42", icon: Heart, color: "text-red-600" },
+    { label: "Lopende Chats", value: "18", icon: MessageSquare, color: "text-green-600" },
+    { label: "Matches Vandaag", value: "5", icon: ShieldCheck, color: "text-purple-600" },
   ];
 
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-2xl font-bold text-slate-900">Beheer Overzicht</h1>
-        <p className="text-slate-500">Real-time statistieken van het platform.</p>
+        <h1 className="text-2xl font-bold text-slate-900">Systeemoverzicht</h1>
+        <p className="text-slate-500">Real-time statistieken van het Samen Verder platform.</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {stats.map((stat, i) => (
           <Card key={i}>
-            <CardContent className="pt-6">
-              <div className="flex justify-between items-start">
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm font-medium text-slate-500">{stat.label}</p>
-                  <p className="text-3xl font-bold text-slate-900 mt-1">{stat.value}</p>
+                  <p className="text-2xl font-bold text-slate-900 mt-1">{stat.value}</p>
                 </div>
-                <div className="p-2 bg-slate-100 rounded-lg text-slate-600">
-                  <stat.icon className="h-5 w-5" />
+                <div className={`h-12 w-12 rounded-xl bg-slate-50 flex items-center justify-center ${stat.color}`}>
+                  <stat.icon className="h-6 w-6" />
                 </div>
               </div>
-              <div className="mt-4 flex items-center space-x-2">
-                {stat.up ? (
-                  <TrendingUp className="h-4 w-4 text-emerald-500" />
-                ) : (
-                  <TrendingDown className="h-4 w-4 text-rose-500" />
-                )}
-                <span className={`text-xs font-bold ${stat.up ? 'text-emerald-600' : 'text-rose-600'}`}>
-                  {stat.change}
-                </span>
-                <span className="text-xs text-slate-400">vs. vorige maand</span>
+              <div className="mt-4 flex items-center text-xs text-green-600 font-medium">
+                <TrendingUp className="h-3 w-3 mr-1" />
+                <span>+12% sinds vorige week</span>
               </div>
             </CardContent>
           </Card>
         ))}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-12">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <Card>
           <CardHeader>
-            <CardTitle>Nieuwe Aanmeldingen</CardTitle>
+            <CardTitle>Recente Aanmeldingen</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              {[
-                { name: "Jeroen K.", role: "Buddy", time: "10 min geleden" },
-                { name: "Annet S.", role: "Ouder", time: "45 min geleden" },
-                { name: "Karel de G.", role: "Buddy", time: "3 uur geleden" },
-                { name: "Sanne V.", role: "Ouder", time: "5 uur geleden" },
-              ].map((user, i) => (
-                <div key={i} className="flex items-center justify-between p-3 bg-slate-50 rounded-xl">
+              {[1, 2, 3, 4].map((i) => (
+                <div key={i} className="flex items-center justify-between py-2 border-b last:border-0">
                   <div className="flex items-center space-x-3">
-                    <div className="h-8 w-8 rounded-full bg-slate-200" />
+                    <div className="h-8 w-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 font-bold text-xs">
+                      {String.fromCharCode(64 + i)}
+                    </div>
                     <div>
-                      <p className="text-sm font-bold text-slate-900">{user.name}</p>
-                      <p className="text-xs text-slate-500">{user.role}</p>
+                      <p className="text-sm font-medium text-slate-900">Anonieme Ouder #{1000 + i}</p>
+                      <p className="text-xs text-slate-500">2 uur geleden</p>
                     </div>
                   </div>
-                  <span className="text-[10px] font-medium text-slate-400">{user.time}</span>
+                  <span className="text-xs font-bold px-2 py-1 bg-blue-50 text-blue-600 rounded-full">NIEUW</span>
                 </div>
               ))}
             </div>
@@ -82,15 +65,35 @@ export default function BeheerDashboard() {
 
         <Card>
           <CardHeader>
-            <CardTitle>Openstaande Matches</CardTitle>
+            <CardTitle>Systeem Status</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="flex flex-col items-center justify-center py-12 text-center">
-              <div className="h-12 w-12 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center mb-4">
-                <CheckCircle className="h-6 w-6" />
+            <div className="space-y-6">
+              <div className="space-y-2">
+                <div className="flex justify-between text-xs font-medium">
+                  <span className="text-slate-500">Database Belasting</span>
+                  <span className="text-slate-900">24%</span>
+                </div>
+                <div className="h-2 w-full bg-slate-100 rounded-full overflow-hidden">
+                  <div className="h-full bg-green-500 w-[24%]" />
+                </div>
               </div>
-              <p className="font-medium text-slate-900">Alles bijgewerkt!</p>
-              <p className="text-sm text-slate-500 max-w-[200px] mt-1">Er zijn momenteel geen ouders die wachten op een directe match.</p>
+              <div className="space-y-2">
+                <div className="flex justify-between text-xs font-medium">
+                  <span className="text-slate-500">AI Response Time</span>
+                  <span className="text-slate-900">1.2s</span>
+                </div>
+                <div className="h-2 w-full bg-slate-100 rounded-full overflow-hidden">
+                  <div className="h-full bg-blue-500 w-[45%]" />
+                </div>
+              </div>
+              <div className="pt-4">
+                <div className="p-4 rounded-xl bg-slate-900 text-white text-xs font-mono">
+                  [SUCCESS] Database connection established.<br/>
+                  [INFO] OpenAI API is responding within limits.<br/>
+                  [INFO] Vercel deployment: production.
+                </div>
+              </div>
             </div>
           </CardContent>
         </Card>
