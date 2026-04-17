@@ -29,7 +29,31 @@ export default function BuddyChatDetailPage() {
         const res = await fetch(`/api/chat/messages?sessionId=${sessionId}`);
         if (res.ok) {
           const data = await res.json();
-          setMessages(data);
+          if (data && data.length > 0) {
+            setMessages(data);
+          } else if (sessionId?.toString().startsWith('demo-')) {
+            // Fallback for demo sessions
+            setMessages([
+              { 
+                id: 'm1', 
+                content: 'Hallo, ik heb een vraag over hoe ik me moet voorbereiden op het gesprek met de jeugdbeschermer.', 
+                sender_type: 'user', 
+                created_at: new Date(Date.now() - 3600000).toISOString() 
+              },
+              { 
+                id: 'm2', 
+                content: 'Dat is een heel begrijpelijke vraag. Ik kan je daar zeker bij helpen. Heb je al documenten ontvangen?', 
+                sender_type: 'ai', 
+                created_at: new Date(Date.now() - 3500000).toISOString() 
+              },
+              { 
+                id: 'm3', 
+                content: 'Ja, ik heb een stapel papier gekregen maar ik snap er niet veel van.', 
+                sender_type: 'user', 
+                created_at: new Date(Date.now() - 3400000).toISOString() 
+              }
+            ]);
+          }
         }
       } catch (error) {
         console.error("Failed to fetch messages", error);
