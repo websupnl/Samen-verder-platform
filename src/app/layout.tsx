@@ -1,20 +1,20 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Manrope, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const manrope = Manrope({
+  variable: "--font-manrope",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const plusJakartaSans = Plus_Jakarta_Sans({
+  variable: "--font-plus-jakarta-sans",
   subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  title: "Samen Verder | Steun voor ouders en buddies",
-  description: "Een platform voor verbinding, steun en rust. Samen staan we sterker.",
+  title: "Samen Verder - Steun voor ouders bij een uithuisplaatsing",
+  description: "Je staat er niet alleen voor. Een ervaren buddy luistert zonder oordeel, helpt je overzicht te bewaren in moeilijke gesprekken en vertaalt ingewikkelde taal naar heldere stappen.",
 };
 
 export default function RootLayout({
@@ -25,9 +25,15 @@ export default function RootLayout({
   return (
     <html
       lang="nl"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${manrope.variable} ${plusJakartaSans.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-[#fdfcfb] text-[#2d2d2d]">
+      <head>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <body className="min-h-full flex flex-col font-body bg-background text-on-background">
         {children}
       </body>
     </html>

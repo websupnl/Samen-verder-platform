@@ -1,9 +1,62 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #b5baa4;
-  --color-primary-foreground: #ffffff;
-  
+  --color-on-secondary-container: #505349;
+  --color-on-background: #313330;
+  --color-tertiary: #615f57;
+  --color-on-secondary-fixed: #3d4037;
+  --color-primary-fixed-dim: #d2d7c0;
+  --color-on-surface-variant: #5e5f5c;
+  --color-on-surface: #313330;
+  --color-background: #fbf9f6;
+  --color-outline: #7a7b77;
+  --color-secondary-dim: #51544a;
+  --color-on-primary: #f7fbe3;
+  --color-secondary-container: #e2e4d7;
+  --color-primary-fixed: #e0e5ce;
+  --color-on-secondary-fixed-variant: #5a5d53;
+  --color-surface-container-lowest: #ffffff;
+  --color-tertiary-dim: #55534b;
+  --color-on-error: #fff7f6;
+  --color-inverse-on-surface: #9e9d9a;
+  --color-on-tertiary-fixed: #48463e;
+  --color-tertiary-fixed: #f2eee2;
+  --color-secondary: #5d6056;
+  --color-surface-variant: #e3e3de;
+  --color-inverse-surface: #0e0e0d;
+  --color-surface-dim: #dadad6;
+  --color-on-primary-fixed: #3c4131;
+  --color-secondary-fixed: #e2e4d7;
+  --color-on-primary-container: #4f5442;
+  --color-error-dim: #791903;
+  --color-error: #a73b21;
+  --color-surface-tint: #5c614f;
+  --color-on-error-container: #6e1400;
+  --color-primary: #5c614f;
+  --color-on-tertiary: #fdf9ed;
+  --color-on-tertiary-fixed-variant: #65635a;
+  --color-outline-variant: #b2b2ae;
+  --color-surface-container-low: #f5f3f0;
+  --color-primary-dim: #505543;
+  --color-on-tertiary-container: #5a5850;
+  --color-surface-bright: #fbf9f6;
+  --color-tertiary-fixed-dim: #e3dfd4;
+  --color-tertiary-container: #f2eee2;
+  --color-inverse-primary: #f7fce4;
+  --color-surface-container-high: #e9e8e4;
+  --color-error-container: #fd795a;
+  --color-primary-container: #e0e5ce;
+  --color-surface-container-highest: #e3e3de;
+  --color-surface: #fbf9f6;
+  --color-on-primary-fixed-variant: #585e4b;
+  --color-surface-container: #efeeea;
+  --color-on-secondary: #f8faed;
+  --color-secondary-fixed-dim: #d4d6c9;
+
+  --font-headline: var(--font-plus-jakarta-sans);
+  --font-body: var(--font-manrope);
+  --font-label: var(--font-manrope);
+
   --color-sage-50: #f7f8f5;
   --color-sage-100: #eef1eb;
   --color-sage-200: #dde3d6;
@@ -14,26 +67,23 @@
   --color-sage-700: #5c6250;
   --color-sage-800: #4a4f41;
   --color-sage-900: #3f4338;
-
-  --radius-2xl: 1rem;
-  --radius-3xl: 1.5rem;
 }
 
 :root {
-  --background: #fdfcfb;
-  --foreground: #2d2d2d;
-  --primary: #b5baa4;
-  --primary-foreground: #ffffff;
+  --background: #fbf9f6;
+  --foreground: #313330;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
 }
 
 @layer base {
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-semibold tracking-tight;
+  * {
+    @apply border-outline-variant/20;
+  }
+  ::selection {
+    @apply bg-primary-container text-on-primary-container;
   }
 }
