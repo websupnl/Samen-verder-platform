@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 
@@ -34,7 +36,10 @@ export default function Home() {
                   <Link href="/aanmelden" className="px-8 py-4 rounded-full bg-gradient-to-br from-primary to-primary-dim text-on-primary font-bold text-lg hover:shadow-[0_8px_30px_rgba(49,51,48,0.12)] transition-all flex items-center justify-center font-headline">
                     Vraag een buddy aan
                   </Link>
-                  <button className="px-8 py-4 rounded-full bg-surface-container-highest text-on-surface font-bold text-lg hover:bg-surface-variant transition-all flex items-center justify-center font-headline">
+                  <button 
+                    onClick={() => window.dispatchEvent(new CustomEvent('open-anonymous-chat'))}
+                    className="px-8 py-4 rounded-full bg-surface-container-highest text-on-surface font-bold text-lg hover:bg-surface-variant transition-all flex items-center justify-center font-headline cursor-pointer"
+                  >
                     Praat eerst anoniem
                   </button>
                 </div>
@@ -508,7 +513,10 @@ export default function Home() {
               <Link href="/aanmelden" className="px-10 py-5 rounded-full bg-primary text-on-primary font-bold text-lg hover:bg-primary-dim shadow-[0_8px_30px_rgba(92,97,79,0.2)] transition-all font-headline">
                 Vraag een buddy aan
               </Link>
-              <button className="px-10 py-5 rounded-full bg-surface-container-highest text-on-surface font-bold text-lg hover:bg-surface-variant transition-all font-headline">
+              <button 
+                onClick={() => window.dispatchEvent(new CustomEvent('open-anonymous-chat'))}
+                className="px-10 py-5 rounded-full bg-surface-container-highest text-on-surface font-bold text-lg hover:bg-surface-variant transition-all font-headline cursor-pointer"
+              >
                 Bel of app ons anoniem
               </button>
             </div>
