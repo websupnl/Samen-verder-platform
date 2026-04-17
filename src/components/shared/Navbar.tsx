@@ -15,19 +15,19 @@ export const Navbar = () => {
             className="text-[#313330]/70 dark:text-[#fbf9f6]/70 hover:text-[#5c614f] dark:hover:text-[#e0e5ce] transition-colors text-sm font-medium font-headline"
             href="/ouders"
           >
-            Ouders
+            Voor ouders
           </Link>
           <Link
             className="text-[#313330]/70 dark:text-[#fbf9f6]/70 hover:text-[#5c614f] dark:hover:text-[#e0e5ce] transition-colors text-sm font-medium font-headline"
             href="/professionals"
           >
-            Professionals
+            Voor professionals
           </Link>
           <Link
             className="text-[#313330]/70 dark:text-[#fbf9f6]/70 hover:text-[#5c614f] dark:hover:text-[#e0e5ce] transition-colors text-sm font-medium font-headline"
             href="/buddy"
           >
-            Buddy Worden
+            Buddy worden
           </Link>
           <Link
             className="text-[#313330]/70 dark:text-[#fbf9f6]/70 hover:text-[#5c614f] dark:hover:text-[#e0e5ce] transition-colors text-sm font-medium font-headline"
@@ -43,12 +43,12 @@ export const Navbar = () => {
           </Link>
         </div>
         <div className="hidden lg:flex items-center space-x-4">
-          <Link
-            className="px-5 py-2.5 rounded-full text-sm font-bold bg-surface-container-highest text-on-surface hover:bg-surface-variant transition-colors font-headline"
-            href="#"
+          <button
+            onClick={() => window.dispatchEvent(new CustomEvent('open-anonymous-chat'))}
+            className="px-5 py-2.5 rounded-full text-sm font-bold bg-surface-container-highest text-on-surface hover:bg-surface-variant transition-colors font-headline cursor-pointer"
           >
             Praat anoniem
-          </Link>
+          </button>
           <Link
             className="px-5 py-2.5 rounded-full text-sm font-bold bg-primary text-on-primary hover:bg-primary-dim transition-colors shadow-[0_4px_14px_rgba(49,51,48,0.06)] font-headline"
             href="/aanmelden"
