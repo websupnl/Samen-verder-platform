@@ -1,7 +1,12 @@
 import { sql } from './db';
 import { v4 as uuidv4 } from 'uuid';
+import { isValidUUID } from './utils';
 
 export async function createSession(userId?: string) {
+  if (userId && !isValidUUID(userId)) {
+    throw new Error(`Invalid userId provided to createSession: ${userId}`);
+  }
+
   const id = uuidv4();
   await sql`
     INSERT INTO chat_sessions (id, user_id, status)
@@ -11,6 +16,11 @@ export async function createSession(userId?: string) {
 }
 
 export async function getMessages(sessionId: string) {
+  if (!isValidUUID(sessionId)) {
+    console.warn(`Invalid sessionId provided to getMessages: ${sessionId}`);
+    return [];
+  }
+
   const messages = await sql`
     SELECT id, session_id, sender_type, content, created_at
     FROM chat_messages
@@ -21,6 +31,10 @@ export async function getMessages(sessionId: string) {
 }
 
 export async function addMessage(sessionId: string, senderType: 'user' | 'buddy' | 'ai', content: string) {
+  if (!isValidUUID(sessionId)) {
+    throw new Error(`Invalid sessionId provided to addMessage: ${sessionId}`);
+  }
+  
   const id = uuidv4();
   const [message] = await sql`
     INSERT INTO chat_messages (id, session_id, sender_type, content)
@@ -59,6 +73,10 @@ export async function getAllSessions() {
 }
 
 export async function updateSessionStatus(sessionId: string, status: string) {
+  if (!isValidUUID(sessionId)) {
+    throw new Error(`Invalid sessionId provided to updateSessionStatus: ${sessionId}`);
+  }
+
   await sql`
     UPDATE chat_sessions
     SET status = ${status}, updated_at = CURRENT_TIMESTAMP
