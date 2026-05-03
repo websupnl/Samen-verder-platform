@@ -512,7 +512,61 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SECTION 10: FAQ PREVIEW */}
+      {/* SECTION 10: BUDDY TRAINING */}
+      <section className="py-16 md:py-32 bg-surface">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div>
+              <div className="inline-flex items-center px-4 py-2 rounded-full bg-tertiary-container/50 text-on-tertiary-container text-sm font-medium mb-8 font-headline">
+                <span className="material-symbols-outlined text-lg mr-2" style={{ fontVariationSettings: "'FILL' 1" }}>
+                  school
+                </span>
+                Voor buddy-kandidaten
+              </div>
+              <h2 className="text-3xl md:text-4xl font-extrabold text-on-background font-headline tracking-tight mb-6">
+                Je wordt goed voorbereid
+              </h2>
+              <p className="text-lg text-on-surface-variant font-body mb-10 leading-relaxed">
+                Als buddy ga je het gesprek aan met ouders in een kwetsbare situatie. Daarvoor krijg je training, begeleiding en een netwerk van andere buddies — zodat je weet wat je doet en nooit alleen staat.
+              </p>
+              <div className="space-y-4 mb-10">
+                {[
+                  { icon: "menu_book", text: "Training over het systeem, grenzen en luisteren" },
+                  { icon: "support_agent", text: "Een vaste begeleider die beschikbaar blijft" },
+                  { icon: "groups", text: "Intervisie met andere buddies" },
+                  { icon: "volunteer_activism", text: "Onkosten worden vergoed" },
+                ].map((item, i) => (
+                  <div key={i} className="flex items-center gap-4">
+                    <div className="w-10 h-10 rounded-full bg-tertiary-container/40 text-on-tertiary-container flex items-center justify-center shrink-0">
+                      <span className="material-symbols-outlined text-base">{item.icon}</span>
+                    </div>
+                    <p className="text-on-surface-variant font-body">{item.text}</p>
+                  </div>
+                ))}
+              </div>
+              <Link href="/training" className="inline-flex items-center text-primary font-bold hover:gap-2 transition-all font-headline">
+                Bekijk de training <span className="material-symbols-outlined ml-1">arrow_forward</span>
+              </Link>
+            </div>
+            <div className="relative h-[500px] rounded-[3rem] overflow-hidden shadow-2xl">
+              <Image
+                alt="Buddies in training samen"
+                className="absolute inset-0 w-full h-full object-cover"
+                src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=1000"
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-sage-900/60 to-transparent" />
+              <div className="absolute bottom-8 left-8 right-8 bg-surface/90 backdrop-blur-sm p-6 rounded-2xl">
+                <p className="text-on-background font-bold font-headline mb-1">Geen ervaring vereist</p>
+                <p className="text-on-surface-variant text-sm font-body">Empathie en de wil om te luisteren zijn waardevoller dan een diploma.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 12: FAQ PREVIEW */}
       <section className="py-16 md:py-32 bg-surface">
         <div className="max-w-4xl mx-auto px-6">
           <h2 className="text-3xl md:text-4xl font-extrabold text-on-background font-headline tracking-tight mb-8 md:mb-16 text-center">
@@ -527,7 +581,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SECTION 11: FINAL CTA */}
+      {/* SECTION 13: FINAL CTA */}
       <section className="py-16 md:py-32 bg-primary-container/30">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <h2 className="text-4xl md:text-5xl font-extrabold text-on-background font-headline tracking-tight mb-8 leading-tight">

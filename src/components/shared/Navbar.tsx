@@ -12,6 +12,7 @@ export const Navbar = () => {
     { href: "/ouders", label: "Voor ouders" },
     { href: "/professionals", label: "Voor professionals" },
     { href: "/buddy", label: "Buddy worden" },
+    { href: "/training", label: "Training" },
     { href: "/hoe-werkt-het", label: "Uitleg" },
     { href: "/contact", label: "Contact" },
   ];
