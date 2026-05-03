@@ -111,7 +111,7 @@ export default function ProfessionalsPage() {
           <div className="flex flex-col items-center">
             <h2 className="text-2xl font-bold text-sage-900 mb-6">Technologie van</h2>
             <Image
-              src="/images/WebsUp (1).png"
+              src="/images/websup-color.png"
               alt="WebsUp.nl"
               width={300}
               height={120}
@@ -122,7 +122,7 @@ export default function ProfessionalsPage() {
             </p>
             <div className="flex items-center space-x-8 opacity-50 hover:opacity-100 transition-all">
               <Image
-                src="/images/WebsUp (1).png"
+                src="/images/websup-color.png"
                 alt="WebsUp.nl"
                 width={160}
                 height={64}

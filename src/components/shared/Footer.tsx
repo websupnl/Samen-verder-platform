@@ -98,7 +98,7 @@ export const Footer = () => {
         >
           <span className="text-on-background/60 font-body text-xs">Website ontwikkeld door</span>
           <Image
-            src="/images/WebsUp (1).png"
+            src="/images/websup-color.png"
             alt="WebsUp.nl"
             width={80}
             height={28}
