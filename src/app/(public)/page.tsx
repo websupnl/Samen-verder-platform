@@ -80,7 +80,7 @@ export default function Home() {
               <Image
                 alt="Ondersteunend gesprek in een warme, rustige omgeving"
                 className="absolute inset-0 w-full h-full object-cover"
-                src="/images/Hero home.png"
+                src="/images/two-women-discussing-sitting-in-chairs-indoors-2026-01-11-11-10-36-utc.jpg"
                 fill
                 priority
                 sizes="(max-width: 1024px) 100vw, 50vw"
