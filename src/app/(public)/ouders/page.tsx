@@ -11,8 +11,9 @@ export default function OudersPage() {
       <PublicPageHero
         title="U bent niet alleen"
         description="Als ouder staat u er soms alleen voor. Samen Verder biedt een warme plek waar u ondersteuning kunt vinden van iemand die er echt voor u is."
-        image="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&q=80&w=1200"
-        imageAlt="Twee mensen in een ondersteunend gesprek"
+        image="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=1400"
+        imageAlt="Ouder in een rustige, warme omgeving"
+        imageFullBleed
       >
         <Button asChild size="lg">
           <Link href="/aanmelden">Vind een buddy</Link>
