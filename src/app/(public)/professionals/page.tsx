@@ -109,15 +109,31 @@ export default function ProfessionalsPage() {
       <section className="bg-white py-24 border-t border-sage-100">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
           <div className="flex flex-col items-center">
-            <h2 className="text-2xl font-bold text-sage-900 mb-4">Technologie van</h2>
-            <WebsUpLogo className="h-16 w-auto mb-6 rounded-xl bg-sage-900 px-3 py-2" />
-            <p className="text-sage-600 max-w-xl mb-8">
+            <h2 className="text-2xl font-bold text-sage-900 mb-6">Technologie van</h2>
+            <div className="bg-sage-900 rounded-2xl px-8 py-5 mb-6">
+              <Image
+                src="/images/WebsUp.nl logo wit.png"
+                alt="WebsUp.nl"
+                width={240}
+                height={82}
+                className="h-16 w-auto"
+              />
+            </div>
+            <p className="text-sage-600 max-w-xl mb-10">
               Het Samen Verder platform draait op technologie die ontwikkeld is met focus op veiligheid, toegankelijkheid en gebruiksvriendelijkheid.
             </p>
-            <div className="flex items-center space-x-8 opacity-50 grayscale hover:grayscale-0 transition-all">
-              <WebsUpLogo className="h-12 w-auto rounded-lg bg-sage-900 px-2 py-1" />
+            <div className="flex items-center space-x-8 opacity-50 hover:opacity-100 transition-all">
+              <div className="bg-sage-900 rounded-xl px-4 py-2">
+                <Image
+                  src="/images/WebsUp.nl logo wit.png"
+                  alt="WebsUp.nl"
+                  width={160}
+                  height={55}
+                  className="h-10 w-auto"
+                />
+              </div>
               <div className="h-8 w-px bg-sage-200" />
-              <div className="text-xl font-bold italic">Samen Verder</div>
+              <div className="text-xl font-bold italic text-sage-900">Samen Verder</div>
             </div>
           </div>
         </div>
