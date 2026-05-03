@@ -180,7 +180,7 @@ export default function TrainingPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="relative h-80 rounded-3xl overflow-hidden shadow-xl">
               <Image
-                src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&q=80&w=1000"
+                src="/images/two-women-discussing-sitting-in-chairs-indoors-2026-01-11-11-10-36-utc.jpg"
                 alt="Buddy in gesprek met begeleider"
                 fill
                 className="object-cover"
