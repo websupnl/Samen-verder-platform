@@ -36,8 +36,8 @@ export default function ProfessionalsPage() {
       {/* Sfeerfoto */}
       <section className="relative h-72 md:h-96 overflow-hidden">
         <Image
-          src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&q=80&w=1600"
-          alt="Professionals in overleg"
+          src="/images/business-meeting-with-handshake-in-a-bright-workpl-2026-01-09-11-36-35-utc.jpg"
+          alt="Business meeting met handshake"
           fill
           className="object-cover object-top"
           sizes="100vw"
