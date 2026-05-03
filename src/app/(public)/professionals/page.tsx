@@ -26,7 +26,7 @@ export default function ProfessionalsPage() {
               alt="WebsUp.nl"
               width={120}
               height={41}
-              className="h-8 w-auto"
+              className="h-14 w-auto"
             />
           </div>
         </div>
