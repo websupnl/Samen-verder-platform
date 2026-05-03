@@ -263,13 +263,9 @@ export function AnonymousChat() {
           {isOpen ? (
             <X className="h-7 w-7 text-on-surface" />
           ) : (
-            <Image
-              src="/images/favicon en icon voor logo.png"
-              alt="Chat openen"
-              width={40}
-              height={40}
-              className="h-10 w-10 rounded-xl"
-            />
+            <span className="material-symbols-outlined text-white text-4xl" style={{ fontVariationSettings: "'FILL' 1, 'wght' 400" }}>
+              forum
+            </span>
           )}
         </button>
       </div>
