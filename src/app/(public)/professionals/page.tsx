@@ -38,10 +38,10 @@ export default function ProfessionalsPage() {
           <div className="max-w-3xl">
             <h2 className="text-3xl font-bold text-sage-900 mb-6">Wat biedt Samen Verder?</h2>
             <p className="text-lg text-sage-600 leading-relaxed mb-6">
-              Samen Verder koppelt ouders aan een vrijwillige buddy — iemand die luistert, uitlegt en meedenkt. Geen behandelaar, geen jeugdbeschermer, maar een mens naast de ouder.
+              Samen Verder koppelt ouders aan een vrijwillige buddy: iemand die luistert, uitlegt en meedenkt. Geen behandelaar, geen jeugdbeschermer, maar een mens naast de ouder.
             </p>
             <p className="text-lg text-sage-600 leading-relaxed">
-              Een buddy kan emotionele steun bieden, helpen bij het begrijpen van brieven en besluiten, of een ouder voorbereiden op een gesprek of zitting. Dit vult aan wat u als professional biedt — het vervangt formele hulpverlening niet.
+              Een buddy kan emotionele steun bieden, helpen bij het begrijpen van brieven en besluiten, of een ouder voorbereiden op een gesprek of zitting. Dit vult aan wat u als professional biedt. Het vervangt formele hulpverlening niet.
             </p>
           </div>
 
@@ -120,7 +120,7 @@ export default function ProfessionalsPage() {
           <div className="mt-12 bg-primary/5 border border-primary/10 rounded-3xl p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
             <div>
               <h3 className="font-bold text-sage-900 text-lg mb-1">Heeft u vragen of wilt u materiaal ontvangen?</h3>
-              <p className="text-sage-600 text-sm">Posters, visitekaartjes of informatie voor in uw organisatie — neem contact op.</p>
+              <p className="text-sage-600 text-sm">Posters, visitekaartjes of informatie voor in uw organisatie. Neem contact op.</p>
             </div>
             <Button asChild size="lg" className="shrink-0">
               <Link href="/contact" className="flex items-center gap-2">

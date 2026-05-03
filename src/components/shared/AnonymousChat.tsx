@@ -111,7 +111,7 @@ export function AnonymousChat() {
                   <div>
                     <div className="flex items-center gap-2">
                       <span className="h-2 w-2 bg-green-400 rounded-full" />
-                      <CardTitle className="text-base font-headline">Samen Verder — Chat</CardTitle>
+                      <CardTitle className="text-base font-headline">Samen Verder Chat</CardTitle>
                     </div>
                     <p className="text-xs text-white/80 mt-0.5">Anoniem · Geen aanmelding nodig</p>
                   </div>
@@ -241,7 +241,7 @@ export function AnonymousChat() {
                 Zit je met vragen?
               </p>
               <p className="text-xs text-on-surface-variant leading-relaxed">
-                Chat anoniem met een buddy. Geen aanmelding, geen naam — gewoon een luisterend oor.
+                Chat anoniem met een buddy. Geen aanmelding, geen naam. Gewoon een luisterend oor.
               </p>
               {/* Staartje naar rechts */}
               <div className="absolute -right-2 bottom-5 w-4 h-4 bg-white border-t border-r border-outline-variant/20 rotate-45" />

@@ -527,7 +527,7 @@ export default function Home() {
                 Je wordt goed voorbereid
               </h2>
               <p className="text-lg text-on-surface-variant font-body mb-10 leading-relaxed">
-                Als buddy ga je het gesprek aan met ouders in een kwetsbare situatie. Daarvoor krijg je training, begeleiding en een netwerk van andere buddies — zodat je weet wat je doet en nooit alleen staat.
+                Als buddy ga je het gesprek aan met ouders in een kwetsbare situatie. Daarvoor krijg je training, begeleiding en een netwerk van andere buddies. Zodat je weet wat je doet en nooit alleen staat.
               </p>
               <div className="space-y-4 mb-10">
                 {[
