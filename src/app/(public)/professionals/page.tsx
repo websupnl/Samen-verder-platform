@@ -21,7 +21,9 @@ export default function ProfessionalsPage() {
           </Button>
           <div className="flex items-center space-x-2 text-sm text-sage-300">
             <span>In samenwerking met</span>
-            <WebsUpLogo className="h-8 w-auto" />
+            <a href="https://websup.nl" target="_blank" rel="noopener noreferrer" className="font-bold text-white hover:text-sage-200 transition-colors">
+              WebsUp.nl
+            </a>
           </div>
         </div>
       </PublicPageHero>
