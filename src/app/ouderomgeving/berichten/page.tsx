@@ -3,15 +3,15 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
-import { Send, User, Bot } from 'lucide-react';
-import { isValidUUID } from '@/lib/utils';
-
-interface Message {
-  id: string;
-  content: string;
-  sender_type: 'user' | 'buddy' | 'ai';
-  created_at: string;
-}
+import { Send, User, HeartHandshake } from 'lucide-react';
+import {
+  appendChatMessage,
+  createChatMessage,
+  getChatHistory,
+  getOrCreateChatSessionId,
+  setChatHistory,
+  type ChatClientMessage,
+} from '@/lib/chat-client';
 
 const QUICK_PROMPTS = [
   "Ik weet niet waar ik moet beginnen",
@@ -22,57 +22,13 @@ const QUICK_PROMPTS = [
 ];
 
 export default function OuderBerichtenPage() {
-  const [messages, setMessages] = useState<Message[]>([]);
+  const [sessionId] = useState<string>(() => (typeof window === 'undefined' ? '' : getOrCreateChatSessionId()));
+  const [messages, setMessages] = useState<ChatClientMessage[]>(() =>
+    typeof window === 'undefined' || !sessionId ? [] : getChatHistory(sessionId)
+  );
   const [inputText, setInputText] = useState('');
-  const [sessionId, setSessionId] = useState<string>('');
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const storedId = localStorage.getItem('chat_session_id');
-      if (storedId && isValidUUID(storedId)) {
-        setSessionId(storedId);
-      } else {
-        // Clear invalid ID if it exists
-        if (storedId) localStorage.removeItem('chat_session_id');
-
-        const initSession = async () => {
-          try {
-            const res = await fetch('/api/chat/sessions', { method: 'POST' });
-            if (res.ok) {
-              const { sessionId } = await res.json();
-              localStorage.setItem('chat_session_id', sessionId);
-              setSessionId(sessionId);
-            }
-          } catch (error) {
-            console.error("Failed to init session", error);
-          }
-        };
-        initSession();
-      }
-    }
-  }, []);
-
-  useEffect(() => {
-    if (sessionId) {
-      const fetchMessages = async () => {
-        try {
-          const res = await fetch(`/api/chat/messages?sessionId=${sessionId}`);
-          if (res.ok) {
-            const data = await res.json();
-            setMessages(data);
-          }
-        } catch (error) {
-          console.error("Failed to fetch messages", error);
-        }
-      };
-
-      fetchMessages();
-      const interval = setInterval(fetchMessages, 3000);
-      return () => clearInterval(interval);
-    }
-  }, [sessionId]);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -85,24 +41,32 @@ export default function OuderBerichtenPage() {
     setIsTyping(true);
 
     try {
+      const userMessage = createChatMessage(text, 'user');
+      const nextMessages = [...messages, userMessage];
+      setMessages(nextMessages);
+      setChatHistory(sessionId, nextMessages);
+
       const res = await fetch('/api/chat/messages', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           text,
           senderType: 'user',
-          sessionId
+          history: messages,
         }),
       });
 
       if (res.ok) {
-        const savedMessage = await res.json();
-        setMessages(prev => [...prev, savedMessage]);
+        const data = await res.json();
+        if (data.amyMessage) {
+          setMessages(prev => [...prev, data.amyMessage]);
+          appendChatMessage(sessionId, data.amyMessage);
+        }
       }
     } catch (error) {
       console.error("Failed to send message", error);
     } finally {
-      setTimeout(() => setIsTyping(false), 2000);
+      setIsTyping(false);
     }
   };
 
@@ -118,10 +82,10 @@ export default function OuderBerichtenPage() {
           <div className="flex flex-col">
             <div className="flex items-center space-x-2">
               <div className="h-2 w-2 bg-green-400 rounded-full animate-pulse" />
-              <CardTitle className="text-lg">Voorbeeldgesprek met een buddy</CardTitle>
+              <CardTitle className="text-lg">Voorbeeldgesprek met Amy</CardTitle>
             </div>
             <p className="text-xs text-white/80 mt-1">
-              In deze demo worden reacties automatisch gegenereerd. In de praktijk worden gesprekken opgepakt door echte buddy&apos;s.
+              In deze demo praat je met Amy, onze voorbeeldbuddy. In de praktijk worden gesprekken opgepakt door echte buddy&apos;s.
             </p>
           </div>
         </CardHeader>
@@ -129,9 +93,9 @@ export default function OuderBerichtenPage() {
         <CardContent className="flex-grow overflow-y-auto p-6 space-y-4 bg-sage-50/30">
           {messages.length === 0 && (
             <div className="text-center py-12 text-sage-500">
-              <Bot className="h-16 w-16 mx-auto mb-4 opacity-20" />
+              <HeartHandshake className="h-16 w-16 mx-auto mb-4 opacity-20" />
               <p className="text-lg font-medium text-sage-900 mb-2">Hoe kunnen we je vandaag helpen?</p>
-              <p className="text-sm max-w-md mx-auto mb-8">Dit voorbeeldgesprek laat zien hoe een eerste laagdrempelig contactmoment eruit kan zien.</p>
+              <p className="text-sm max-w-md mx-auto mb-8">Dit voorbeeldgesprek laat zien hoe een eerste laagdrempelig contactmoment met Amy eruit kan zien.</p>
               
               <div className="flex flex-wrap justify-center gap-3">
                 {QUICK_PROMPTS.map((prompt) => (
@@ -163,7 +127,7 @@ export default function OuderBerichtenPage() {
                   {m.sender_type === 'user' ? (
                     <><span>Jij</span><User className="h-3 w-3" /></>
                   ) : (
-                    <><span>Buddy (Demo)</span><Bot className="h-3 w-3" /></>
+                    <><span>Amy</span><HeartHandshake className="h-3 w-3" /></>
                   )}
                 </div>
                 {m.content}

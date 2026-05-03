@@ -1,37 +1,44 @@
+import Image from "next/image";
 import { Button } from "@/components/ui/Button";
+import { PublicPageHero } from "@/components/shared/PublicPageHero";
+import { TrustBadgesSection } from "@/components/shared/TrustBadgesSection";
+import { WebsUpLogo } from "@/components/shared/WebsUpLogo";
 import { Building2, ClipboardList, TrendingUp } from "lucide-react";
 import Link from "next/link";
 
 export default function ProfessionalsPage() {
   return (
     <div className="flex flex-col w-full">
-      <section className="bg-sage-900 py-16 sm:py-24 text-white">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl">
-            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
-              Voor Professionals & Partners
-            </h1>
-            <p className="mt-6 text-xl text-sage-200">
-              Werk samen met ons om de ondersteuning voor ouders in uw regio te 
-              versterken. Een innovatieve aanpak voor vrijwillige inzet en matching.
-            </p>
-            <div className="mt-10 flex gap-4">
-              <Button asChild size="lg" className="bg-primary hover:bg-sage-500">
-                <Link href="/contact">Neem contact op</Link>
-              </Button>
-              <div className="flex items-center space-x-2 text-sm text-sage-300">
-                <span>In samenwerking met</span>
-                <span className="font-bold text-white tracking-wider">WebsUp</span>
-              </div>
-            </div>
+      <PublicPageHero
+        title="Voor Professionals & Partners"
+        description="Werk samen met ons om de ondersteuning voor ouders in uw regio te versterken. Een innovatieve aanpak voor vrijwillige inzet en matching."
+        image="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&q=80&w=1200"
+        imageAlt="Professionals in overleg"
+      >
+        <div className="flex gap-4">
+          <Button asChild size="lg" className="bg-primary hover:bg-sage-500">
+            <Link href="/contact">Neem contact op</Link>
+          </Button>
+          <div className="flex items-center space-x-2 text-sm text-sage-300">
+            <span>In samenwerking met</span>
+            <WebsUpLogo className="h-8 w-auto" />
           </div>
         </div>
-      </section>
+      </PublicPageHero>
 
       <section className="py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div>
+              <div className="relative h-64 rounded-3xl overflow-hidden shadow-lg mb-10">
+                <Image
+                  src="https://images.unsplash.com/photo-1560472355-536de3962603?auto=format&fit=crop&q=80&w=900"
+                  alt="Professionals in vergadering"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+              </div>
               <h2 className="text-3xl font-bold text-sage-900">Waarom partner worden?</h2>
               <p className="mt-4 text-lg text-sage-600 leading-relaxed">
                 Samen Verder biedt een gestructureerde en veilige manier om 
@@ -91,18 +98,19 @@ export default function ProfessionalsPage() {
         </div>
       </section>
 
+      <TrustBadgesSection />
+
       <section className="bg-white py-24 border-t border-sage-100">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
           <div className="flex flex-col items-center">
-            <h2 className="text-2xl font-bold text-sage-900 mb-4">Technologie van WebsUp</h2>
+            <h2 className="text-2xl font-bold text-sage-900 mb-4">Technologie van</h2>
+            <WebsUpLogo className="h-16 w-auto mb-6 rounded-xl bg-sage-900 px-3 py-2" />
             <p className="text-sage-600 max-w-xl mb-8">
-              Het Samen Verder platform draait op de beproefde technologie van WebsUp, 
-              ontwikkeld met een focus op veiligheid, toegankelijkheid en gebruiksvriendelijkheid.
+              Het Samen Verder platform draait op technologie die ontwikkeld is met focus op veiligheid, toegankelijkheid en gebruiksvriendelijkheid.
             </p>
             <div className="flex items-center space-x-8 opacity-50 grayscale hover:grayscale-0 transition-all">
-              {/* Placeholder for partner logos */}
-              <div className="text-2xl font-black tracking-tighter">WEBSUP</div>
-              <div className="h-8 w-px bg-sage-200"></div>
+              <WebsUpLogo className="h-12 w-auto rounded-lg bg-sage-900 px-2 py-1" />
+              <div className="h-8 w-px bg-sage-200" />
               <div className="text-xl font-bold italic">Samen Verder</div>
             </div>
           </div>

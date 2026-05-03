@@ -4,10 +4,10 @@ import { ClipboardList, Plus, FileText, Download } from "lucide-react";
 
 export default function BuddyRapportagePage() {
   const reports = [
-    { id: 1, date: "15 april 2024", match: "Maria Jansen", type: "Wekelijks verslag", status: "Ingediend" },
-    { id: 2, date: "8 april 2024", match: "Maria Jansen", type: "Wekelijks verslag", status: "Ingediend" },
-    { id: 3, date: "1 april 2024", match: "Maria Jansen", type: "Maandelijkse evaluatie", status: "Geaccepteerd" },
-    { id: 4, date: "25 maart 2024", match: "Pieter Bakker", type: "Intake verslag", status: "Geaccepteerd" },
+    { id: 1, date: "2 mei 2026", match: "Ouder uit Leeuwarden", type: "Gespreksnotitie", status: "Concept" },
+    { id: 2, date: "30 april 2026", match: "Ouder uit Drachten", type: "Kennismaking", status: "Ingediend" },
+    { id: 3, date: "26 april 2026", match: "Ouder uit Leeuwarden", type: "Vragenlijst gesprek", status: "Afgerond" },
+    { id: 4, date: "18 april 2026", match: "Ouder uit Leeuwarden", type: "Eerste contact", status: "Afgerond" },
   ];
 
   return (
@@ -51,7 +51,7 @@ export default function BuddyRapportagePage() {
                       <td className="py-4 text-sm text-sage-600">{report.type}</td>
                       <td className="py-4 text-sm">
                         <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                          report.status === 'Geaccepteerd' ? 'bg-green-100 text-green-700' : 'bg-blue-100 text-blue-700'
+                          report.status === 'Afgerond' ? 'bg-green-100 text-green-700' : report.status === 'Concept' ? 'bg-amber-100 text-amber-700' : 'bg-blue-100 text-blue-700'
                         }`}>
                           {report.status}
                         </span>

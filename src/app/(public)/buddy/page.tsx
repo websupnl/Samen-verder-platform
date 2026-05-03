@@ -1,36 +1,32 @@
+import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent } from "@/components/ui/Card";
+import { PublicPageHero } from "@/components/shared/PublicPageHero";
+import { TrustBadgesSection } from "@/components/shared/TrustBadgesSection";
+import { FaqAccordion } from "@/components/shared/FaqAccordion";
 import { Users, Star, BookOpen, Coffee } from "lucide-react";
 import Link from "next/link";
 
 export default function BuddyPage() {
   return (
     <div className="flex flex-col w-full">
-      <section className="bg-primary py-16 sm:py-24 text-white">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl">
-            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
-              Word een Buddy
-            </h1>
-            <p className="mt-6 text-xl text-sage-50">
-              Maak een verschil in het leven van een ouder. Jouw tijd en aandacht 
-              kunnen de wereld betekenen voor iemand die het even moeilijk heeft.
-            </p>
-            <div className="mt-10">
-              <Button asChild size="lg" variant="secondary" className="bg-white text-primary hover:bg-sage-50">
-                <Link href="/aanmelden">Meld je aan als buddy</Link>
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
+      <PublicPageHero
+        title="Word een Buddy"
+        description="Maak een verschil in het leven van een ouder. Jouw tijd en aandacht kunnen de wereld betekenen voor iemand die het even moeilijk heeft."
+        image="https://images.unsplash.com/photo-1531545514256-b1400bc00f31?auto=format&fit=crop&q=80&w=1200"
+        imageAlt="Twee mensen in een vriendelijk gesprek"
+      >
+        <Button asChild size="lg" variant="secondary" className="bg-white text-primary hover:bg-sage-50">
+          <Link href="/aanmelden">Meld je aan als buddy</Link>
+        </Button>
+      </PublicPageHero>
 
       <section className="py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold text-sage-900">Wat doet een buddy?</h2>
             <p className="mt-4 text-lg text-sage-600 max-w-2xl mx-auto">
-              Als buddy ben je er voor een ander. Je biedt ondersteuning op basis van 
+              Als buddy ben je er voor een ander. Je biedt ondersteuning op basis van
               gelijkwaardigheid en vertrouwen.
             </p>
           </div>
@@ -72,31 +68,64 @@ export default function BuddyPage() {
         </div>
       </section>
 
+      {/* Split image + tekst sectie */}
+      <section className="py-24 bg-sage-50">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div className="relative h-96 rounded-3xl overflow-hidden shadow-xl">
+              <Image
+                src="https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&q=80&w=1000"
+                alt="Buddy en ouder in een ondersteunend gesprek"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+            </div>
+            <div>
+              <h2 className="text-3xl font-bold text-sage-900 mb-6">Waarom buddy worden?</h2>
+              <p className="text-lg text-sage-600 leading-relaxed mb-8">
+                Als buddy geef je iets wat niet te kopen is: echte menselijke aandacht en verbinding. Jouw ervaring en betrokkenheid kunnen een ouder helpen om het hoofd boven water te houden in een moeilijke periode.
+              </p>
+              <ul className="space-y-4">
+                {[
+                  "Je bepaalt zelf hoeveel tijd je hebt",
+                  "Je krijgt begeleiding en training",
+                  "Je maakt een concreet verschil",
+                  "Onkosten worden vergoed",
+                ].map((item, i) => (
+                  <li key={i} className="flex items-center gap-3 text-sage-700">
+                    <span className="w-2 h-2 rounded-full bg-primary flex-shrink-0" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <TrustBadgesSection />
+
       <section className="bg-sage-50 py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="bg-white rounded-3xl p-8 md:p-16 shadow-sm border border-sage-100">
             <h2 className="text-3xl font-bold text-sage-900 mb-8">Veelgestelde vragen voor buddies</h2>
-            <div className="space-y-6 text-left">
-              {[
+            <FaqAccordion
+              items={[
                 {
-                  q: "Hoeveel tijd kost het?",
-                  a: "Dat bepaal je zelf in overleg met de ouder. Gemiddeld is het 1 tot 2 uur per week.",
+                  question: "Hoeveel tijd kost het?",
+                  answer: "Dat bepaal je zelf in overleg met de ouder. Gemiddeld is het 1 tot 2 uur per week.",
                 },
                 {
-                  q: "Krijg ik begeleiding?",
-                  a: "Ja, we bieden trainingen en er is altijd een professional beschikbaar voor overleg.",
+                  question: "Krijg ik begeleiding?",
+                  answer: "Ja, we bieden trainingen en er is altijd een professional beschikbaar voor overleg.",
                 },
                 {
-                  q: "Zijn er kosten aan verbonden?",
-                  a: "Nee, buddy worden is volledig kosteloos. Eventuele onkosten kunnen worden vergoed.",
+                  question: "Zijn er kosten aan verbonden?",
+                  answer: "Nee, buddy worden is volledig kosteloos. Eventuele onkosten kunnen worden vergoed.",
                 },
-              ].map((faq, i) => (
-                <div key={i}>
-                  <h4 className="font-bold text-sage-900">{faq.q}</h4>
-                  <p className="mt-2 text-sage-600">{faq.a}</p>
-                </div>
-              ))}
-            </div>
+              ]}
+            />
             <div className="mt-12">
               <Button asChild size="lg">
                 <Link href="/aanmelden">Start jouw buddy avontuur</Link>

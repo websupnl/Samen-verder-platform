@@ -42,3 +42,4 @@ next-env.d.ts
 
 # local chat storage
 chat_messages.json
+data/local-chat-store.json

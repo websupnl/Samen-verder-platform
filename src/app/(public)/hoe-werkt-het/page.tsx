@@ -1,4 +1,5 @@
 import { Card, CardContent } from "@/components/ui/Card";
+import { PublicPageHero } from "@/components/shared/PublicPageHero";
 import { UserPlus, Search, Handshake, Heart } from "lucide-react";
 
 export default function HoeWerktHetPage() {
@@ -27,17 +28,11 @@ export default function HoeWerktHetPage() {
 
   return (
     <div className="flex flex-col w-full">
-      <section className="bg-sage-50 py-16 sm:py-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl font-bold tracking-tight text-sage-900 sm:text-5xl">
-            Hoe werkt het?
-          </h1>
-          <p className="mt-6 text-xl text-sage-600 max-w-2xl mx-auto">
-            Het proces is eenvoudig en veilig. We begeleiden je bij elke stap 
-            om een waardevolle verbinding te maken.
-          </p>
-        </div>
-      </section>
+      <PublicPageHero
+        title="Hoe werkt het?"
+        description="Het proces is eenvoudig en veilig. We begeleiden je bij elke stap om een waardevolle verbinding te maken."
+        align="center"
+      />
 
       <section className="py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

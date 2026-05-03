@@ -1,10 +1,12 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { Users, ClipboardList, TrendingUp, Clock, MessageCircle, ArrowRight } from "lucide-react";
 import Link from 'next/link';
+import { demoMatches, demoSessions } from '@/lib/buddy-demo-data';
+import { getChatHistory } from '@/lib/chat-client';
 
 interface ChatSession {
   sessionId: string;
@@ -13,41 +15,25 @@ interface ChatSession {
 }
 
 export default function BuddyDashboard() {
-  const [sessions, setSessions] = useState<ChatSession[]>([]);
+  const [sessions] = useState<ChatSession[]>(() =>
+    demoSessions.map((session) => {
+      const storedMessages = getChatHistory(session.sessionId);
+      const lastMessage = storedMessages.at(-1);
 
-  useEffect(() => {
-    const fetchSessions = async () => {
-      try {
-        const res = await fetch('/api/chat/sessions');
-        if (res.ok) {
-          const data = await res.json();
-          if (data && data.length > 0) {
-            setSessions(data);
-          } else {
-            setSessions([
-              { sessionId: 'demo-1', lastMessage: 'Bedankt voor de hulp gisteren!', timestamp: new Date().toISOString() }
-            ]);
-          }
-        }
-      } catch (error) {
-        console.error("Failed to fetch sessions", error);
-        setSessions([
-          { sessionId: 'demo-1', lastMessage: 'Bedankt voor de hulp gisteren!', timestamp: new Date().toISOString() }
-        ]);
-      }
-    };
-
-    fetchSessions();
-    const interval = setInterval(fetchSessions, 5000);
-    return () => clearInterval(interval);
-  }, []);
+      return {
+        sessionId: session.sessionId,
+        lastMessage: lastMessage?.content || session.last_message,
+        timestamp: lastMessage?.created_at || session.last_message_at,
+      };
+    })
+  );
 
   return (
     <div className="space-y-8">
       <div className="flex justify-between items-end">
         <div>
           <h1 className="text-2xl font-bold text-sage-900">Buddy Dashboard</h1>
-          <p className="text-sage-600">Beheer je matches en bekijk je voortgang.</p>
+          <p className="text-sage-600">Beheer je matches, openstaande vragen en contactmomenten.</p>
         </div>
         <Button>Nieuwe rapportage</Button>
       </div>
@@ -57,7 +43,25 @@ export default function BuddyDashboard() {
           <CardContent className="pt-6">
             <div className="flex items-center space-x-3 mb-2">
               <Users className="h-5 w-5 text-primary" />
-              <span className="text-sm font-medium text-sage-600">Actieve Matches</span>
+              <span className="text-sm font-medium text-sage-600">Actieve matches</span>
+            </div>
+            <p className="text-3xl font-bold text-sage-900">{demoMatches.length}</p>
+          </CardContent>
+        </Card>
+        <Card className="bg-white">
+          <CardContent className="pt-6">
+            <div className="flex items-center space-x-3 mb-2">
+              <Clock className="h-5 w-5 text-primary" />
+              <span className="text-sm font-medium text-sage-600">Contactmomenten</span>
+            </div>
+            <p className="text-3xl font-bold text-sage-900">3</p>
+          </CardContent>
+        </Card>
+        <Card className="bg-white">
+          <CardContent className="pt-6">
+            <div className="flex items-center space-x-3 mb-2">
+              <ClipboardList className="h-5 w-5 text-primary" />
+              <span className="text-sm font-medium text-sage-600">Afspraken te checken</span>
             </div>
             <p className="text-3xl font-bold text-sage-900">2</p>
           </CardContent>
@@ -65,28 +69,10 @@ export default function BuddyDashboard() {
         <Card className="bg-white">
           <CardContent className="pt-6">
             <div className="flex items-center space-x-3 mb-2">
-              <Clock className="h-5 w-5 text-primary" />
-              <span className="text-sm font-medium text-sage-600">Uren deze maand</span>
-            </div>
-            <p className="text-3xl font-bold text-sage-900">8.5</p>
-          </CardContent>
-        </Card>
-        <Card className="bg-white">
-          <CardContent className="pt-6">
-            <div className="flex items-center space-x-3 mb-2">
-              <ClipboardList className="h-5 w-5 text-primary" />
-              <span className="text-sm font-medium text-sage-600">Rapporten</span>
-            </div>
-            <p className="text-3xl font-bold text-sage-900">12</p>
-          </CardContent>
-        </Card>
-        <Card className="bg-white">
-          <CardContent className="pt-6">
-            <div className="flex items-center space-x-3 mb-2">
               <TrendingUp className="h-5 w-5 text-primary" />
-              <span className="text-sm font-medium text-sage-600">Impact Score</span>
+              <span className="text-sm font-medium text-sage-600">Open vragen</span>
             </div>
-            <p className="text-3xl font-bold text-sage-900">9.4</p>
+            <p className="text-3xl font-bold text-sage-900">4</p>
           </CardContent>
         </Card>
       </div>
@@ -98,19 +84,18 @@ export default function BuddyDashboard() {
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              {[
-                { name: "Maria Jansen", status: "Wekelijks contact", last: "2 dagen geleden" },
-                { name: "Pieter Bakker", status: "Maandelijks contact", last: "5 dagen geleden" },
-              ].map((match, i) => (
-                <div key={i} className="flex items-center justify-between p-4 border border-sage-50 rounded-2xl hover:bg-sage-50 transition-colors">
+              {demoMatches.map((match) => (
+                <div key={match.id} className="flex items-center justify-between p-4 border border-sage-50 rounded-2xl hover:bg-sage-50 transition-colors">
                   <div className="flex items-center space-x-3">
-                    <div className="h-10 w-10 rounded-full bg-sage-200" />
+                    <div className="h-10 w-10 rounded-full bg-sage-200 flex items-center justify-center text-primary font-bold text-sm">{match.initials}</div>
                     <div>
-                      <p className="font-bold text-sage-900">{match.name}</p>
-                      <p className="text-xs text-sage-500">{match.status}</p>
+                      <p className="font-bold text-sage-900">{match.label}</p>
+                      <p className="text-xs text-sage-500">{match.status} · {match.nextStep}</p>
                     </div>
                   </div>
-                  <Button variant="ghost" size="sm">Details</Button>
+                  <Button asChild variant="ghost" size="sm">
+                    <Link href={`/buddyomgeving/chat/${match.sessionId}`}>Open</Link>
+                  </Button>
                 </div>
               ))}
             </div>

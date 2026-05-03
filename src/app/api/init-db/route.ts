@@ -11,6 +11,10 @@ export async function GET(req: NextRequest) {
   }
 
   try {
+    if (!process.env.DATABASE_URL) {
+      return NextResponse.json({ message: 'Database disabled for this prototype.', skipped: true });
+    }
+
     await initializeDatabase();
     return NextResponse.json({ message: 'Database initialized successfully!' });
   } catch (error: any) {

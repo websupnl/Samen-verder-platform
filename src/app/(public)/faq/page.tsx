@@ -1,40 +1,36 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
+import { PublicPageHero } from "@/components/shared/PublicPageHero";
+import { FaqAccordion } from "@/components/shared/FaqAccordion";
 
 export default function FAQPage() {
   const faqs = [
     {
-      q: "Is Samen Verder gratis?",
-      a: "Ja, het gebruik van het platform en de ondersteuning door een buddy is volledig gratis voor ouders.",
+      question: "Is Samen Verder gratis?",
+      answer: "Ja. Een buddy via Samen Verder hoort gratis te zijn voor ouders. Het aanbod is bedoeld als laagdrempelige steun wanneer er al genoeg op je afkomt.",
     },
     {
-      q: "Hoe word ik gekoppeld aan een buddy?",
-      a: "Na je aanmelding vindt er een kennismakingsgesprek plaats. Op basis daarvan zoeken we een passende match.",
+      question: "Hoe word ik gekoppeld aan een buddy?",
+      answer: "Na je aanmelding vindt er een kennismakingsgesprek plaats. Op basis daarvan zoeken we een passende match.",
     },
     {
-      q: "Wat als er geen klik is met mijn buddy?",
-      a: "Dat kan gebeuren. Geef het aan bij je contactpersoon, dan kijken we samen naar een andere oplossing.",
+      question: "Wat als er geen klik is met mijn buddy?",
+      answer: "Dat kan gebeuren. Geef het aan bij je contactpersoon, dan kijken we samen naar een andere oplossing.",
     },
     {
-      q: "Is mijn privacy gewaarborgd?",
-      a: "Absoluut. We gaan zeer zorgvuldig om met je gegevens en communicatie verloopt via een beveiligde omgeving.",
+      question: "Is mijn privacy gewaarborgd?",
+      answer: "Absoluut. We gaan zeer zorgvuldig om met je gegevens en communicatie verloopt via een beveiligde omgeving.",
     },
   ];
 
   return (
-    <div className="mx-auto max-w-3xl px-4 py-16 sm:py-24">
-      <h1 className="text-4xl font-bold text-sage-900 mb-8 text-center">Veelgestelde vragen</h1>
-      <div className="space-y-6">
-        {faqs.map((faq, i) => (
-          <Card key={i}>
-            <CardHeader>
-              <CardTitle className="text-primary text-lg">{faq.q}</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sage-600">{faq.a}</p>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
+    <div className="flex flex-col w-full">
+      <PublicPageHero
+        title="Veelgestelde vragen"
+        description="Antwoorden op vragen die vaak terugkomen over Samen Verder, buddies, privacy en aanmelden."
+        align="center"
+      />
+      <section className="mx-auto w-full max-w-3xl px-4 py-16 sm:py-24">
+        <FaqAccordion items={faqs} />
+      </section>
     </div>
   );
 }

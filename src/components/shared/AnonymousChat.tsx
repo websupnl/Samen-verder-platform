@@ -1,18 +1,18 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from 'react';
-import { Send, X, MessageCircle, User, HeartHandshake, Sparkles } from 'lucide-react';
+import { Send, X, MessageCircle, User, HeartHandshake } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
 import { motion, AnimatePresence } from 'framer-motion';
-import { isValidUUID } from '@/lib/utils';
-
-interface Message {
-  id: string;
-  content: string;
-  sender_type: 'user' | 'buddy' | 'ai';
-  created_at: string;
-}
+import {
+  appendChatMessage,
+  createChatMessage,
+  getChatHistory,
+  getOrCreateChatSessionId,
+  setChatHistory,
+  type ChatClientMessage,
+} from '@/lib/chat-client';
 
 const QUICK_PROMPTS = [
   "Ik weet niet waar ik moet beginnen",
@@ -24,64 +24,20 @@ const QUICK_PROMPTS = [
 
 export function AnonymousChat() {
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState<Message[]>([]);
+  const [sessionId] = useState<string>(() => (typeof window === 'undefined' ? '' : getOrCreateChatSessionId()));
+  const [messages, setMessages] = useState<ChatClientMessage[]>(() =>
+    typeof window === 'undefined' || !sessionId ? [] : getChatHistory(sessionId)
+  );
   const [inputText, setInputText] = useState('');
-  const [sessionId, setSessionId] = useState<string>('');
   const [isTyping, setIsTyping] = useState(false);
   const [showTooltip, setShowTooltip] = useState(true);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Generate or get session ID
-    if (typeof window !== 'undefined') {
-      const storedId = localStorage.getItem('chat_session_id');
-      if (storedId && isValidUUID(storedId)) {
-        setSessionId(storedId);
-      } else {
-        // Clear invalid ID if it exists
-        if (storedId) localStorage.removeItem('chat_session_id');
-
-        // Create new session via API
-        const initSession = async () => {
-          try {
-            const res = await fetch('/api/chat/sessions', { method: 'POST' });
-            if (res.ok) {
-              const { sessionId } = await res.json();
-              localStorage.setItem('chat_session_id', sessionId);
-              setSessionId(sessionId);
-            }
-          } catch (error) {
-            console.error("Failed to init session", error);
-          }
-        };
-        initSession();
-      }
-    }
-
     const handleOpenChat = () => setIsOpen(true);
     window.addEventListener('open-anonymous-chat', handleOpenChat);
     return () => window.removeEventListener('open-anonymous-chat', handleOpenChat);
   }, []);
-
-  useEffect(() => {
-    if (isOpen && sessionId) {
-      const fetchMessages = async () => {
-        try {
-          const res = await fetch(`/api/chat/messages?sessionId=${sessionId}`);
-          if (res.ok) {
-            const data = await res.json();
-            setMessages(data);
-          }
-        } catch (error) {
-          console.error("Failed to fetch messages", error);
-        }
-      };
-
-      fetchMessages();
-      const interval = setInterval(fetchMessages, 3000);
-      return () => clearInterval(interval);
-    }
-  }, [isOpen, sessionId]);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -90,36 +46,37 @@ export function AnonymousChat() {
   const handleSendMessage = async (text: string) => {
     if (!text.trim() || !sessionId) return;
 
-    const userMessage = {
-      content: text,
-      sender_type: 'user' as const,
-      sessionId,
-    };
-
     setInputText('');
     setIsTyping(true);
 
     try {
+      const userMessage = createChatMessage(text, 'user');
+      const nextMessages = [...messages, userMessage];
+      setMessages(nextMessages);
+      setChatHistory(sessionId, nextMessages);
+
       const res = await fetch('/api/chat/messages', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           text,
           senderType: 'user',
-          sessionId
+          history: messages,
         }),
       });
 
       if (res.ok) {
-        const savedMessage = await res.json();
-        setMessages(prev => [...prev, savedMessage]);
+        const data = await res.json();
+        const amyMessage = data.amyMessage;
+        if (amyMessage) {
+          setMessages(prev => [...prev, amyMessage]);
+          appendChatMessage(sessionId, amyMessage);
+        }
       }
     } catch (error) {
       console.error("Failed to send message", error);
     } finally {
-      // In a real app, AI response would come via the same or another request
-      // Polling will pick it up, but we keep typing indicator for a bit
-      setTimeout(() => setIsTyping(false), 2000);
+      setIsTyping(false);
     }
   };
 
@@ -200,7 +157,7 @@ export function AnonymousChat() {
                         {m.sender_type === 'user' ? (
                           <><span>Jij</span><User className="h-3 w-3" /></>
                         ) : (
-                          <><span>Buddy</span><HeartHandshake className="h-3 w-3" /></>
+                          <><span>Amy</span><HeartHandshake className="h-3 w-3" /></>
                         )}
                       </div>
                       {m.content}

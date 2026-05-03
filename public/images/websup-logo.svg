@@ -1,0 +1,26 @@
+<svg width="482" height="164" viewBox="0 0 482 164" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">WebsUp logo</title>
+  <desc id="desc">WebsUp logo met oranje W, witte tekst en kleurrijke sloganbalk.</desc>
+  <defs>
+    <linearGradient id="wGradient" x1="61" y1="58" x2="146" y2="122" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#ff7a1a"/>
+      <stop offset="1" stop-color="#ff5a1f"/>
+    </linearGradient>
+    <linearGradient id="tagGradient" x1="150" y1="136" x2="480" y2="136" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#ff7a1a"/>
+      <stop offset="0.45" stop-color="#f2646a"/>
+      <stop offset="1" stop-color="#b56dff"/>
+    </linearGradient>
+  </defs>
+  <path d="M78 57c10 0 18 8 18 18v46c0 12-10 22-22 22s-22-10-22-22V75c0-10 8-18 18-18h8Z" fill="url(#wGradient)"/>
+  <path d="M110 57c10 0 18 8 18 18v37c0 7 5 12 12 12s12-5 12-12V75c0-10 8-18 18-18s18 8 18 18v45c0 12-10 22-22 22h-2c-12 0-22-10-22-22v-2c-4 14-17 24-32 24-18 0-32-14-32-32V75c0-10 8-18 18-18h14Z" fill="url(#wGradient)"/>
+  <path d="M102 106 136 138l-19 4 8 20-13 5-8-21-16 13 3-47 11-6Z" fill="#fff" stroke="#303030" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M94 24 115 55" stroke="#ff5e73" stroke-width="10" stroke-linecap="round"/>
+  <path d="M125 14 128 48" stroke="#ff5e73" stroke-width="10" stroke-linecap="round"/>
+  <path d="M160 25 139 54" stroke="#ff5e73" stroke-width="10" stroke-linecap="round"/>
+  <path d="M150 61 169 56" stroke="#ff5e73" stroke-width="10" stroke-linecap="round"/>
+  <text x="174" y="103" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="58" font-weight="900" letter-spacing="-3">ebsUp</text>
+  <circle cx="373" cy="98" r="7" fill="#a974ff"/>
+  <rect x="149" y="126" width="333" height="38" rx="8" fill="url(#tagGradient)"/>
+  <text x="163" y="151" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="800">Samen bouwen aan jouw bedrijf.</text>
+</svg>

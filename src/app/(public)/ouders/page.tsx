@@ -1,37 +1,31 @@
+import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent } from "@/components/ui/Card";
+import { PublicPageHero } from "@/components/shared/PublicPageHero";
 import { Heart, MessageCircle, Shield, CheckCircle2 } from "lucide-react";
 import Link from "next/link";
 
 export default function OudersPage() {
   return (
     <div className="flex flex-col w-full">
-      <section className="bg-sage-50 py-16 sm:py-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl">
-            <h1 className="text-4xl font-bold tracking-tight text-sage-900 sm:text-5xl">
-              U bent niet alleen
-            </h1>
-            <p className="mt-6 text-xl text-sage-600">
-              Als ouder staat u er soms alleen voor. Samen Verder biedt een warme plek 
-              waar u ondersteuning kunt vinden van iemand die er echt voor u is.
-            </p>
-            <div className="mt-10">
-              <Button asChild size="lg">
-                <Link href="/aanmelden">Vind een buddy</Link>
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
+      <PublicPageHero
+        title="U bent niet alleen"
+        description="Als ouder staat u er soms alleen voor. Samen Verder biedt een warme plek waar u ondersteuning kunt vinden van iemand die er echt voor u is."
+        image="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&q=80&w=1200"
+        imageAlt="Twee mensen in een ondersteunend gesprek"
+      >
+        <Button asChild size="lg">
+          <Link href="/aanmelden">Vind een buddy</Link>
+        </Button>
+      </PublicPageHero>
 
       <section className="py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
               <h2 className="text-3xl font-bold text-sage-900">Wat een buddy voor u kan betekenen</h2>
               <p className="mt-4 text-lg text-sage-600">
-                Een buddy is een vrijwilliger die een luisterend oor biedt, meehelpt met 
+                Een buddy is een vrijwilliger die een luisterend oor biedt, meehelpt met
                 praktische zaken of gewoon een kopje koffie met u drinkt.
               </p>
               <ul className="mt-8 space-y-4">
@@ -90,6 +84,24 @@ export default function OudersPage() {
               </Card>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Image break section */}
+      <section className="relative h-72 overflow-hidden">
+        <Image
+          src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&q=80&w=1600"
+          alt="Mensen die samen koffie drinken en praten"
+          fill
+          className="object-cover"
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-sage-900/50 flex items-center justify-center">
+          <blockquote className="max-w-2xl text-center px-6">
+            <p className="text-2xl font-medium text-white italic">
+              &ldquo;Je hoeft dit niet alleen te dragen. Er is iemand die naast je wil staan.&rdquo;
+            </p>
+          </blockquote>
         </div>
       </section>
 

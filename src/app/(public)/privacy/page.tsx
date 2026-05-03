@@ -1,7 +1,13 @@
+import { PublicPageHero } from "@/components/shared/PublicPageHero";
+
 export default function PrivacyPage() {
   return (
-    <div className="mx-auto max-w-3xl px-4 py-16 sm:py-24">
-      <h1 className="text-4xl font-bold text-sage-900 mb-8">Privacybeleid</h1>
+    <div className="flex flex-col w-full">
+      <PublicPageHero
+        title="Privacybeleid"
+        description="Hoe Samen Verder omgaat met persoonsgegevens, communicatie en veiligheid op het platform."
+      />
+      <section className="mx-auto w-full max-w-3xl px-4 py-16 sm:py-24">
       <div className="prose prose-sage">
         <p className="mb-4 text-sm text-sage-500 italic">Laatst bijgewerkt: 17 april 2024</p>
         <p>
@@ -24,6 +30,7 @@ export default function PrivacyPage() {
           tegen ongeautoriseerde toegang.
         </p>
       </div>
+      </section>
     </div>
   );
 }

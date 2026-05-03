@@ -2,70 +2,29 @@
 
 import React, { useEffect, useState, useRef } from 'react';
 import { useParams, useRouter } from 'next/navigation';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
+import { Card, CardContent, CardHeader } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
-import { Send, ArrowLeft, User, Sparkles, CheckCircle2, HeartHandshake } from 'lucide-react';
-
-interface Message {
-  id: string;
-  content: string;
-  sender_type: 'user' | 'buddy' | 'ai';
-  created_at: string;
-}
+import { Send, ArrowLeft, User, CheckCircle2, HeartHandshake } from 'lucide-react';
+import { getDemoMessages } from '@/lib/buddy-demo-data';
+import {
+  createChatMessage,
+  getChatHistory,
+  setChatHistory,
+  type ChatClientMessage,
+} from '@/lib/chat-client';
 
 export default function BuddyChatDetailPage() {
   const { sessionId } = useParams();
   const router = useRouter();
-  const [messages, setMessages] = useState<Message[]>([]);
+  const sessionKey = sessionId?.toString() || '';
+  const [messages, setMessages] = useState<ChatClientMessage[]>(() => {
+    if (!sessionKey) return [];
+    const storedMessages = getChatHistory(sessionKey);
+    if (storedMessages.length > 0) return storedMessages;
+    return sessionKey.startsWith('demo-') ? getDemoMessages(sessionKey) : [];
+  });
   const [inputText, setInputText] = useState('');
-  const [loading, setLoading] = useState(true);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!sessionId) return;
-
-    const fetchMessages = async () => {
-      try {
-        const res = await fetch(`/api/chat/messages?sessionId=${sessionId}`);
-        if (res.ok) {
-          const data = await res.json();
-          if (data && data.length > 0) {
-            setMessages(data);
-          } else if (sessionId?.toString().startsWith('demo-')) {
-            // Fallback for demo sessions
-            setMessages([
-              { 
-                id: 'm1', 
-                content: 'Hallo, ik heb een vraag over hoe ik me moet voorbereiden op het gesprek met de jeugdbeschermer.', 
-                sender_type: 'user', 
-                created_at: new Date(Date.now() - 3600000).toISOString() 
-              },
-              { 
-                id: 'm2', 
-                content: 'Dat is een heel begrijpelijke vraag. Ik kan je daar zeker bij helpen. Heb je al documenten ontvangen?', 
-                sender_type: 'ai', 
-                created_at: new Date(Date.now() - 3500000).toISOString() 
-              },
-              { 
-                id: 'm3', 
-                content: 'Ja, ik heb een stapel papier gekregen maar ik snap er niet veel van.', 
-                sender_type: 'user', 
-                created_at: new Date(Date.now() - 3400000).toISOString() 
-              }
-            ]);
-          }
-        }
-      } catch (error) {
-        console.error("Failed to fetch messages", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchMessages();
-    const interval = setInterval(fetchMessages, 3000);
-    return () => clearInterval(interval);
-  }, [sessionId]);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -73,38 +32,18 @@ export default function BuddyChatDetailPage() {
 
   const handleSendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!inputText.trim() || !sessionId) return;
+    if (!inputText.trim() || !sessionKey) return;
 
     const textToSend = inputText;
     setInputText('');
 
-    try {
-      const res = await fetch('/api/chat/messages', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          text: textToSend,
-          senderType: 'buddy',
-          sessionId
-        }),
-      });
-
-      if (res.ok) {
-        const savedMessage = await res.json();
-        setMessages(prev => [...prev, savedMessage]);
-      }
-    } catch (error) {
-      console.error("Failed to send message", error);
-    }
+    const buddyMessage = createChatMessage(textToSend, 'buddy');
+    setMessages(prev => {
+      const next = [...prev, buddyMessage];
+      setChatHistory(sessionKey, next);
+      return next;
+    });
   };
-
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center h-64">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
-      </div>
-    );
-  }
 
   return (
     <div className="flex flex-col h-[calc(100vh-12rem)]">
@@ -114,7 +53,7 @@ export default function BuddyChatDetailPage() {
         </Button>
         <div>
           <h1 className="text-2xl font-bold text-sage-900 font-headline">Gesprek met ouder</h1>
-          <p className="text-sm text-sage-500 font-body">Sessie ID: {sessionId}</p>
+          <p className="text-sm text-sage-500 font-body">Sessie ID: {sessionKey}</p>
         </div>
       </div>
 
@@ -138,7 +77,7 @@ export default function BuddyChatDetailPage() {
               <HeartHandshake className="h-4 w-4 mr-2" />
               Buddy-instructie
             </div>
-            <p>De AI heeft het eerste contact opgevangen. Je kunt nu het gesprek overnemen. Zodra jij reageert, neemt de AI een stapje terug.</p>
+            <p>Amy heeft het eerste contact opgevangen. In deze demo speelt Amy de buddy en reageert zij op vragen van ouders.</p>
           </div>
 
           {messages.length === 0 ? (
@@ -155,7 +94,7 @@ export default function BuddyChatDetailPage() {
                   m.sender_type === 'buddy' 
                     ? 'bg-primary text-white rounded-tr-none' 
                     : m.sender_type === 'ai'
-                    ? 'bg-amber-50/50 text-sage-900 border border-amber-100 rounded-tl-none italic'
+                    ? 'bg-sage-50 text-sage-900 border border-sage-100 rounded-tl-none'
                     : 'bg-sage-50 text-sage-900 border border-sage-100 rounded-tl-none'
                 }`}
               >
@@ -163,7 +102,7 @@ export default function BuddyChatDetailPage() {
                   {m.sender_type === 'buddy' ? (
                     <><span>Jij (Buddy)</span><HeartHandshake className="h-3 w-3" /></>
                   ) : m.sender_type === 'ai' ? (
-                    <><span>AI Buddy Assist</span><Sparkles className="h-3 w-3" /></>
+                    <><span>Amy (Buddy)</span><HeartHandshake className="h-3 w-3" /></>
                   ) : (
                     <><span>Ouder</span><User className="h-3 w-3" /></>
                   )}

@@ -2,15 +2,14 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { TrustBadgesSection } from "@/components/shared/TrustBadgesSection";
+import { FaqAccordion } from "@/components/shared/FaqAccordion";
 
 export default function Home() {
-  const [activeFaq, setActiveFaq] = useState<number | null>(null);
-
   const faqs = [
     {
       question: "Is een buddy gratis?",
-      answer: "Dat hangt af van de uiteindelijke opzet van het aanbod, maar het contact is bedoeld als laagdrempelige ondersteuning."
+      answer: "Ja. Een buddy via Samen Verder hoort gratis te zijn voor ouders. Het aanbod is bedoeld als laagdrempelige steun wanneer er al genoeg op je afkomt."
     },
     {
       question: "Is een buddy een hulpverlener?",
@@ -208,7 +207,7 @@ export default function Home() {
                     Wat een buddy wel doet
                   </h4>
                   <ul className="space-y-4 font-body text-on-surface-variant text-sm">
-                    {["Luisteren zonder oordeel", "Helpen overzicht te krijgen", "Uitleg geven in gewone taal", "Ondersteunen bij gesprekken of voorbereiding", "Helpen vragen op een rij te zetten", "Erkenning geven aan emoties"].map((item, i) => (
+                    {["Luisteren zonder oordeel", "Helpen overzicht te krijgen", "Uitleg geven in gewone taal", "Ondersteunen bij gesprekken of voorbereiding", "Helpen vragen op een rij te zetten"].map((item, i) => (
                       <li key={i} className="flex items-start">
                         <span className="material-symbols-outlined text-primary text-sm mr-2 mt-0.5">done</span>
                         {item}
@@ -244,6 +243,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <TrustBadgesSection />
 
       {/* SECTION 5: WAT HEB JE AAN EEN BUDDY? */}
       <section className="py-32 bg-surface">
@@ -307,7 +308,7 @@ export default function Home() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {[
               { label: "Reactietijd", value: "We proberen binnen 48 uur contact op te nemen" },
-              { label: "Kosten", value: "Het contact is laagdrempelig en gericht op steun" },
+              { label: "Kosten", value: "Gratis voor ouders" },
               { label: "Duur", value: "De begeleiding wordt afgestemd op wat nodig is" },
               { label: "Contactvormen", value: "Telefoon, app, online en soms fysiek" }
             ].map((info, i) => (
@@ -328,7 +329,7 @@ export default function Home() {
             <div>
               <div className="inline-flex items-center px-4 py-2 rounded-full bg-surface/10 text-surface text-sm font-medium mb-8 font-headline border border-surface/20">
                 <span className="material-symbols-outlined text-lg mr-2">info</span>
-                Eerste hulp in gewone taal
+                Eerste overzicht
               </div>
               <h2 className="text-3xl md:text-5xl font-extrabold font-headline tracking-tight mb-8">
                 Ik zit midden in een uithuisplaatsing. Wat nu?
@@ -342,7 +343,7 @@ export default function Home() {
                   { title: "Adem eerst even", text: "Je hoeft niet alles vandaag te begrijpen. Probeer stap voor stap te kijken wat er nu belangrijk is." },
                   { title: "Schrijf namen en afspraken op", text: "Noteer instanties, contactpersonen, data, telefoonnummers en gemaakte afspraken." },
                   { title: "Schrijf je vragen op", text: "Zet op papier wat je niet begrijpt of wat je wilt bespreken." },
-                  { title: "Vraag om uitleg", text: "Als iets onduidelijk is, vraag dan om uitleg in gewone taal." },
+                  { title: "Vragen over lastige onderwerpen?", text: "Wij helpen je graag verder." },
                   { title: "Zoek steun", text: "Praat met iemand die rustig met je mee kan denken." },
                   { title: "Meld je aan voor een buddy", text: "Je hoeft dit niet alleen te dragen. Een buddy kan helpen met steun, uitleg en overzicht." }
                 ].map((item, i) => (
@@ -375,39 +376,96 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SECTION 8: UITLEG IN GEWONE TAAL */}
-      <section className="py-32 bg-surface">
+      {/* SECTION 8: SITUATIEHULP */}
+      <section id="duidelijkheid" className="py-32 bg-surface">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
             <div className="max-w-2xl">
               <h2 className="text-3xl md:text-4xl font-extrabold text-on-background font-headline tracking-tight mb-6">
-                Uitleg en praktische informatie
+                Waar wil je nu duidelijkheid over?
               </h2>
               <p className="text-lg text-on-surface-variant font-body">
-                Geen ingewikkelde wetsteksten, maar begrijpelijke uitleg over woorden, stappen en betrokken organisaties.
+                Kies wat nu speelt. Dan krijg je uitleg, eerste stappen en vragen die je kunt stellen aan de mensen die betrokken zijn.
               </p>
             </div>
             <Link href="/hoe-werkt-het" className="inline-flex px-8 py-4 rounded-full bg-surface-container-high text-on-surface font-bold hover:bg-surface-container-highest transition-all font-headline">
-              Lees de uitleg in gewone taal
+              Bekijk hoe het werkt
             </Link>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              "Wat is een ondertoezichtstelling?",
-              "Wat is een machtiging uithuisplaatsing?",
-              "Wie zijn betrokken, zoals jeugdbescherming, rechter of pleegzorg?",
-              "Wat gebeurt er meestal na een uithuisplaatsing?",
-              "Hoe kun je vragen stellen als iets onduidelijk is?"
+              {
+                title: "Ik heb een brief of beslissing gekregen",
+                text: "Wat betekent OTS, machtiging of beschikking, en welke vragen kun je stellen?",
+                href: "/duidelijkheid/brief-of-beslissing",
+                icon: "description"
+              },
+              {
+                title: "Mijn kind is uit huis geplaatst",
+                text: "Wat gebeurt er meestal daarna, wie zijn betrokken en wat kun je nu doen?",
+                href: "/duidelijkheid/kind-uit-huis-geplaatst",
+                icon: "home_pin"
+              },
+              {
+                title: "Ik moet naar een gesprek of zitting",
+                text: "Hoe bereid je je voor en hoe zet je je vragen rustig op een rij?",
+                href: "/duidelijkheid/gesprek-of-zitting",
+                icon: "forum"
+              },
+              {
+                title: "Ik snap de organisaties niet",
+                text: "Wie doet wat: jeugdbescherming, rechter, Raad, pleegzorg en advocaat.",
+                href: "/duidelijkheid/organisaties",
+                icon: "account_tree"
+              },
+              {
+                title: "Ik wil weten wat mijn rechten zijn",
+                text: "Waar kun je op letten en wanneer is extra juridische hulp verstandig?",
+                href: "/duidelijkheid/rechten",
+                icon: "balance"
+              }
             ].map((topic, i) => (
-              <div key={i} className="group p-8 rounded-3xl bg-surface-container-low hover:bg-primary-container/20 transition-all cursor-pointer border border-outline-variant/10">
-                <h3 className="text-lg font-bold text-on-background font-headline group-hover:text-primary transition-colors pr-8 relative text-balance">
-                  {topic}
-                  <span className="material-symbols-outlined absolute right-0 top-0 text-primary opacity-0 group-hover:opacity-100 transition-all translate-x-[-10px] group-hover:translate-x-0">
+              <Link key={i} href={topic.href} className="group p-8 rounded-3xl bg-surface-container-low hover:bg-primary-container/20 transition-all border border-outline-variant/10 min-h-48 flex flex-col justify-between">
+                <div>
+                  <div className="mb-6 h-12 w-12 rounded-2xl bg-primary-container text-on-primary-container flex items-center justify-center group-hover:bg-primary group-hover:text-on-primary transition-colors">
+                    <span className="material-symbols-outlined">
+                      {topic.icon}
+                    </span>
+                  </div>
+                  <h3 className="text-lg font-bold text-on-background font-headline group-hover:text-primary transition-colors pr-8 relative text-balance mb-4">
+                    {topic.title}
+                    <span className="material-symbols-outlined absolute right-0 top-0 text-primary opacity-0 group-hover:opacity-100 transition-all translate-x-[-10px] group-hover:translate-x-0">
+                      arrow_forward
+                    </span>
+                  </h3>
+                  <p className="text-sm leading-6 text-on-surface-variant font-body">
+                    {topic.text}
+                  </p>
+                </div>
+              </Link>
+            ))}
+            <button
+              type="button"
+              onClick={() => window.dispatchEvent(new CustomEvent('open-anonymous-chat'))}
+              className="group text-left p-8 rounded-3xl bg-primary text-on-primary hover:bg-primary-dim transition-all min-h-48 flex flex-col justify-between"
+            >
+              <div>
+                <div className="mb-6 h-12 w-12 rounded-2xl bg-on-primary/15 text-on-primary flex items-center justify-center">
+                  <span className="material-symbols-outlined">
+                    chat
+                  </span>
+                </div>
+                <h3 className="text-lg font-bold font-headline pr-8 relative text-balance mb-4">
+                  Ik wil mijn verhaal kwijt
+                  <span className="material-symbols-outlined absolute right-0 top-0 text-on-primary opacity-0 group-hover:opacity-100 transition-all translate-x-[-10px] group-hover:translate-x-0">
                     arrow_forward
                   </span>
                 </h3>
+                <p className="text-sm leading-6 text-on-primary/80 font-body">
+                  Stel anoniem een vraag of begin met wat er nu door je hoofd gaat.
+                </p>
               </div>
-            ))}
+            </button>
           </div>
         </div>
       </section>
@@ -465,26 +523,7 @@ export default function Home() {
           <h2 className="text-3xl md:text-4xl font-extrabold text-on-background font-headline tracking-tight mb-16 text-center">
             Veelgestelde vragen
           </h2>
-          <div className="space-y-4 mb-16">
-            {faqs.map((faq, i) => (
-              <div key={i} className="border-b border-outline-variant/30">
-                <button
-                  onClick={() => setActiveFaq(activeFaq === i ? null : i)}
-                  className="w-full py-6 flex justify-between items-center text-left hover:text-primary transition-colors group"
-                >
-                  <span className="text-lg font-bold font-headline">{faq.question}</span>
-                  <span className={`material-symbols-outlined transition-transform duration-300 ${activeFaq === i ? 'rotate-180' : ''}`}>
-                    expand_more
-                  </span>
-                </button>
-                <div className={`overflow-hidden transition-all duration-300 ${activeFaq === i ? 'max-h-96 pb-6' : 'max-h-0'}`}>
-                  <p className="text-on-surface-variant font-body leading-relaxed">
-                    {faq.answer}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
+          <FaqAccordion items={faqs} className="mb-16" />
           <div className="text-center">
             <Link href="/faq" className="inline-flex items-center text-primary font-bold hover:gap-2 transition-all font-headline">
               Bekijk alle vragen <span className="material-symbols-outlined ml-1">arrow_forward</span>

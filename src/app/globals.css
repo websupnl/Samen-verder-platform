@@ -27,17 +27,17 @@
   --color-surface-dim: #dadad6;
   --color-on-primary-fixed: #3c4131;
   --color-secondary-fixed: #e2e4d7;
-  --color-on-primary-container: #4f5442;
+  --color-on-primary-container: #4d572d;
   --color-error-dim: #791903;
   --color-error: #a73b21;
-  --color-surface-tint: #5c614f;
+  --color-surface-tint: #606c38;
   --color-on-error-container: #6e1400;
-  --color-primary: #5c614f;
+  --color-primary: #606c38;
   --color-on-tertiary: #fdf9ed;
   --color-on-tertiary-fixed-variant: #65635a;
   --color-outline-variant: #b2b2ae;
   --color-surface-container-low: #f5f3f0;
-  --color-primary-dim: #505543;
+  --color-primary-dim: #4f5a2d;
   --color-on-tertiary-container: #5a5850;
   --color-surface-bright: #fbf9f6;
   --color-tertiary-fixed-dim: #e3dfd4;
@@ -48,7 +48,7 @@
   --color-primary-container: #e0e5ce;
   --color-surface-container-highest: #e3e3de;
   --color-surface: #fbf9f6;
-  --color-on-primary-fixed-variant: #585e4b;
+  --color-on-primary-fixed-variant: #4f5a2d;
   --color-surface-container: #efeeea;
   --color-on-secondary: #f8faed;
   --color-secondary-fixed-dim: #d4d6c9;
@@ -63,10 +63,10 @@
   --color-sage-300: #c5cdb9;
   --color-sage-400: #b5baa4;
   --color-sage-500: #99a285;
-  --color-sage-600: #777f66;
-  --color-sage-700: #5c6250;
-  --color-sage-800: #4a4f41;
-  --color-sage-900: #3f4338;
+  --color-sage-600: #606c38;
+  --color-sage-700: #4f5a2d;
+  --color-sage-800: #424b25;
+  --color-sage-900: #343c1d;
 }
 
 :root {

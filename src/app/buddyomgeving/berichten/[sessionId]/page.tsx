@@ -2,46 +2,30 @@
 
 import React, { useEffect, useState, useRef } from 'react';
 import { useParams, useRouter } from 'next/navigation';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
+import { Card, CardContent, CardHeader } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
-import { Send, ArrowLeft, User, Bot, CheckCircle2 } from 'lucide-react';
-
-interface Message {
-  id: string;
-  content: string;
-  sender_type: 'user' | 'buddy' | 'ai';
-  created_at: string;
-}
+import { Send, ArrowLeft, User, HeartHandshake, CheckCircle2 } from 'lucide-react';
+import { getDemoMessages } from '@/lib/buddy-demo-data';
+import {
+  createChatMessage,
+  getChatHistory,
+  setChatHistory,
+  type ChatClientMessage,
+} from '@/lib/chat-client';
 
 export default function BuddyChatDetailPage() {
   const { sessionId } = useParams();
   const router = useRouter();
-  const [messages, setMessages] = useState<Message[]>([]);
+  const sessionKey = sessionId?.toString() || '';
+  const [messages, setMessages] = useState<ChatClientMessage[]>(() => {
+    if (!sessionKey) return [];
+    const storedMessages = getChatHistory(sessionKey);
+    if (storedMessages.length > 0) return storedMessages;
+    return sessionKey.startsWith('demo-') ? getDemoMessages(sessionKey) : [];
+  });
   const [inputText, setInputText] = useState('');
-  const [loading, setLoading] = useState(true);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!sessionId) return;
-
-    const fetchMessages = async () => {
-      try {
-        const res = await fetch(`/api/chat/messages?sessionId=${sessionId}`);
-        if (res.ok) {
-          const data = await res.json();
-          setMessages(data);
-        }
-      } catch (error) {
-        console.error("Failed to fetch messages", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchMessages();
-    const interval = setInterval(fetchMessages, 3000);
-    return () => clearInterval(interval);
-  }, [sessionId]);
+  const conversationLabel = sessionKey === 'demo-bezoekregeling' ? 'Ouder uit Drachten' : 'Ouder uit Leeuwarden';
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -49,36 +33,16 @@ export default function BuddyChatDetailPage() {
 
   const handleSendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!inputText.trim() || !sessionId) return;
+    if (!inputText.trim() || !sessionKey) return;
 
-    try {
-      const res = await fetch('/api/chat/messages', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          text: inputText,
-          senderType: 'buddy',
-          sessionId
-        }),
-      });
-
-      if (res.ok) {
-        const savedMessage = await res.json();
-        setMessages(prev => [...prev, savedMessage]);
-        setInputText('');
-      }
-    } catch (error) {
-      console.error("Failed to send message", error);
-    }
+    const buddyMessage = createChatMessage(inputText, 'buddy');
+    setMessages(prev => {
+      const next = [...prev, buddyMessage];
+      setChatHistory(sessionKey, next);
+      return next;
+    });
+    setInputText('');
   };
-
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center h-64">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
-      </div>
-    );
-  }
 
   return (
     <div className="flex flex-col h-[calc(100vh-12rem)]">
@@ -87,8 +51,8 @@ export default function BuddyChatDetailPage() {
           <ArrowLeft className="h-5 w-5" />
         </Button>
         <div>
-          <h1 className="text-xl font-bold text-sage-900">Gesprek met Anonieme Ouder</h1>
-          <p className="text-xs text-sage-500">ID: {sessionId}</p>
+          <h1 className="text-xl font-bold text-sage-900">Gesprek met {conversationLabel}</h1>
+          <p className="text-xs text-sage-500">ID: {sessionKey}</p>
         </div>
       </div>
 
@@ -108,7 +72,7 @@ export default function BuddyChatDetailPage() {
         
         <CardContent className="flex-grow overflow-y-auto p-6 space-y-4">
           <div className="bg-blue-50 border border-blue-100 p-4 rounded-xl text-sm text-blue-800 mb-6">
-            <strong>Buddy-instructie:</strong> De AI heeft het eerste contact opgevangen. Je kunt nu het gesprek overnemen. De AI stopt met reageren zodra jij een bericht stuurt.
+            <strong>Buddy-instructie:</strong> Amy heeft het eerste contact opgevangen. In deze demo speelt Amy de buddy en reageert zij op vragen van ouders.
           </div>
 
           {messages.map((m) => (
@@ -121,7 +85,7 @@ export default function BuddyChatDetailPage() {
                   m.sender_type === 'buddy' 
                     ? 'bg-primary text-white rounded-tr-none' 
                     : m.sender_type === 'ai'
-                    ? 'bg-amber-50 text-sage-900 border border-amber-100 rounded-tl-none italic'
+                    ? 'bg-sage-50 text-sage-900 border border-sage-100 rounded-tl-none'
                     : 'bg-white text-sage-900 border border-sage-100 rounded-tl-none'
                 }`}
               >
@@ -129,7 +93,7 @@ export default function BuddyChatDetailPage() {
                   {m.sender_type === 'buddy' ? (
                     <><span>Jij (Buddy)</span></>
                   ) : m.sender_type === 'ai' ? (
-                    <><span>AI Assistent (Demo)</span><Bot className="h-3 w-3" /></>
+                    <><span>Amy (Buddy)</span><HeartHandshake className="h-3 w-3" /></>
                   ) : (
                     <><span>Ouder</span><User className="h-3 w-3" /></>
                   )}

@@ -4,8 +4,6 @@ import { SCHEMA_SQL } from './db-schema';
 const getSql = () => {
   const url = process.env.DATABASE_URL;
   if (!url) {
-    console.warn('DATABASE_URL is not set. Database operations will fail.');
-    // Return a dummy function or throw later
     return ((strings: TemplateStringsArray, ...values: any[]) => {
       throw new Error('DATABASE_URL is not set');
     }) as any;

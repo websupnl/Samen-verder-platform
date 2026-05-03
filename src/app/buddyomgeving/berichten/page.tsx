@@ -2,9 +2,10 @@
 
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
+import { Card, CardContent } from '@/components/ui/Card';
 import { MessageSquare, Clock, User, ChevronRight } from 'lucide-react';
-import { Button } from '@/components/ui/Button';
+import { demoSessions } from '@/lib/buddy-demo-data';
+import { getChatHistory } from '@/lib/chat-client';
 
 interface Session {
   id: string;
@@ -20,56 +21,22 @@ export default function BuddyBerichtenPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchSessions = async () => {
-      try {
-        const res = await fetch('/api/chat/sessions');
-        if (res.ok) {
-          const data = await res.json();
-          if (data && data.length > 0) {
-            setSessions(data);
-          } else {
-            // Fallback for demo
-            setSessions([
-              { 
-                id: 'demo-1', 
-                status: 'actief', 
-                created_at: new Date(Date.now() - 3600000).toISOString(), 
-                updated_at: new Date().toISOString(), 
-                last_message: 'Bedankt voor de hulp gisteren, dat waardeer ik enorm.', 
-                last_message_at: new Date().toISOString() 
-              },
-              { 
-                id: 'demo-2', 
-                status: 'nieuw', 
-                created_at: new Date(Date.now() - 7200000).toISOString(), 
-                updated_at: new Date(Date.now() - 7200000).toISOString(), 
-                last_message: 'Ik heb een vraag over de zitting van aanstaande donderdag.', 
-                last_message_at: new Date(Date.now() - 7200000).toISOString() 
-              }
-            ]);
-          }
-        }
-      } catch (error) {
-        console.error("Failed to fetch sessions", error);
-        // Fallback for demo on error
-        setSessions([
-          { 
-            id: 'demo-1', 
-            status: 'actief', 
-            created_at: new Date(Date.now() - 3600000).toISOString(), 
-            updated_at: new Date().toISOString(), 
-            last_message: 'Bedankt voor de hulp gisteren, dat waardeer ik enorm.', 
-            last_message_at: new Date().toISOString() 
-          }
-        ]);
-      } finally {
-        setLoading(false);
-      }
-    };
+    const nextSessions = demoSessions.map((session) => {
+      const storedMessages = getChatHistory(session.sessionId);
+      const lastMessage = storedMessages.at(-1);
 
-    fetchSessions();
-    const interval = setInterval(fetchSessions, 5000);
-    return () => clearInterval(interval);
+      if (!lastMessage) return session;
+
+      return {
+        ...session,
+        last_message: lastMessage.content,
+        last_message_at: lastMessage.created_at,
+        updated_at: lastMessage.created_at,
+      };
+    });
+
+    setSessions(nextSessions);
+    setLoading(false);
   }, []);
 
   if (loading) {
@@ -111,7 +78,7 @@ export default function BuddyBerichtenPage() {
                       <div>
                         <div className="flex items-center space-x-2">
                           <p className="font-bold text-sage-900 uppercase text-xs tracking-wider">
-                            Anonieme Ouder
+                            {session.id === "demo-bezoekregeling" ? "Ouder uit Drachten" : "Ouder uit Leeuwarden"}
                           </p>
                           <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold uppercase ${
                             session.status === 'nieuw' ? 'bg-blue-100 text-blue-700' : 'bg-green-100 text-green-700'

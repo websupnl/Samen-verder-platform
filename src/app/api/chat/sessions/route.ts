@@ -1,22 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getAllSessions, createSession } from '@/lib/chat-service';
 
 export async function GET() {
-  try {
-    const sessions = await getAllSessions();
-    return NextResponse.json(sessions);
-  } catch (error) {
-    console.error('Failed to fetch sessions:', error);
-    return NextResponse.json({ error: 'Failed to fetch sessions' }, { status: 500 });
-  }
+  return NextResponse.json([]);
 }
 
 export async function POST(req: NextRequest) {
   try {
-    const body = await req.json();
-    const { userId } = body || {};
-    const sessionId = await createSession(userId);
-    return NextResponse.json({ sessionId });
+    await req.json().catch(() => null);
+    return NextResponse.json({ sessionId: crypto.randomUUID() });
   } catch (error) {
     console.error('Failed to create session:', error);
     return NextResponse.json({ error: 'Failed to create session' }, { status: 500 });

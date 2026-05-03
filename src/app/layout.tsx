@@ -15,6 +15,10 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   title: "Samen Verder - Steun voor ouders bij een uithuisplaatsing",
   description: "Je staat er niet alleen voor. Een ervaren buddy luistert zonder oordeel, helpt je overzicht te bewaren in moeilijke gesprekken en vertaalt ingewikkelde taal naar heldere stappen.",
+  icons: {
+    icon: "/images/favicon en icon voor logo.png",
+    apple: "/images/favicon en icon voor logo.png",
+  },
 };
 
 import { AnonymousChat } from "@/components/shared/AnonymousChat";
