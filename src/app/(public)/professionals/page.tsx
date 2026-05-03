@@ -33,6 +33,18 @@ export default function ProfessionalsPage() {
         </div>
       </PublicPageHero>
 
+      {/* Sfeerfoto */}
+      <section className="relative h-72 md:h-96 overflow-hidden">
+        <Image
+          src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&q=80&w=1600"
+          alt="Professionals in overleg"
+          fill
+          className="object-cover object-top"
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-sage-900/30" />
+      </section>
+
       <section className="py-12 md:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
