@@ -94,7 +94,7 @@ export const Footer = () => {
           href="https://websup.nl"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-2 opacity-60 hover:opacity-100 transition-opacity"
+          className="flex items-center gap-2"
         >
           <span className="text-on-background/60 font-body text-xs">Website ontwikkeld door</span>
           <Image
@@ -102,7 +102,7 @@ export const Footer = () => {
             alt="WebsUp.nl"
             width={80}
             height={28}
-            className="h-12 w-auto"
+            className="h-16 w-auto"
           />
         </a>
       </div>
