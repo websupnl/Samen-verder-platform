@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from 'react';
-import { Send, X, MessageCircle, User, HeartHandshake } from 'lucide-react';
+import Image from 'next/image';
+import { Send, X, HeartHandshake, User } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -86,7 +87,8 @@ export function AnonymousChat() {
   };
 
   return (
-    <div className="fixed bottom-4 right-4 z-50 flex flex-col items-end">
+    <div className="fixed bottom-6 right-6 z-50">
+      {/* Chat venster */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -98,42 +100,50 @@ export function AnonymousChat() {
           >
             <Card className="flex-grow flex flex-col shadow-2xl border-primary/20 overflow-hidden rounded-3xl">
               <CardHeader className="bg-primary text-white p-5 flex flex-row items-center justify-between">
-                <div className="flex flex-col">
-                  <div className="flex items-center space-x-2">
-                    <div className="h-2.5 w-2.5 bg-green-400 rounded-full" />
-                    <CardTitle className="text-xl font-headline">Chat met een Buddy</CardTitle>
+                <div className="flex items-center gap-3">
+                  <Image
+                    src="/images/favicon en icon voor logo.png"
+                    alt="Samen Verder"
+                    width={36}
+                    height={36}
+                    className="h-9 w-9 rounded-xl"
+                  />
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <span className="h-2 w-2 bg-green-400 rounded-full" />
+                      <CardTitle className="text-base font-headline">Samen Verder — Chat</CardTitle>
+                    </div>
+                    <p className="text-xs text-white/80 mt-0.5">Anoniem · Geen aanmelding nodig</p>
                   </div>
-                  <p className="text-xs text-white/90 leading-tight mt-1">
-                    Je staat er niet alleen voor. We zijn er om te luisteren.
-                  </p>
                 </div>
-                <button 
-                  onClick={() => setIsOpen(false)} 
+                <button
+                  onClick={() => setIsOpen(false)}
                   className="bg-white/10 hover:bg-white/20 p-2 rounded-full transition-colors ml-2"
                 >
                   <X className="h-5 w-5 text-white" />
                 </button>
               </CardHeader>
-              
+
               <CardContent className="flex-grow overflow-y-auto p-5 space-y-4 bg-sage-50/30">
-                <div className="bg-amber-50 border border-amber-100 p-4 rounded-2xl text-xs text-amber-800 mb-2 leading-relaxed">
-                  <p><strong>Let op:</strong> Is er sprake van acute onveiligheid of crisis? Neem direct contact op met 112, Veilig Thuis of je eigen hulpverlener.</p>
+                <div className="bg-amber-50 border border-amber-100 p-4 rounded-2xl text-xs text-amber-800 leading-relaxed">
+                  <strong>Let op:</strong> Acute onveiligheid of crisis? Bel 112, Veilig Thuis of je eigen hulpverlener.
                 </div>
-                
+
                 {messages.length === 0 && (
-                  <div className="text-center py-10 text-sage-500">
+                  <div className="text-center py-8 text-sage-500">
                     <div className="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                       <HeartHandshake className="h-8 w-8 text-primary opacity-80" />
                     </div>
-                    <p className="text-base font-semibold text-sage-900 mb-2">Hoe kunnen we je helpen?</p>
-                    <p className="text-sm px-6 leading-relaxed">Heb je vragen of wil je gewoon even je verhaal kwijt? Een Buddy denkt graag met je mee.</p>
-                    
-                    <div className="mt-8 flex flex-wrap justify-center gap-2">
+                    <p className="text-base font-semibold text-sage-900 mb-1">Waar kan ik je mee helpen?</p>
+                    <p className="text-sm text-sage-500 px-4 leading-relaxed">
+                      Stel een vraag, of begin gewoon met wat er nu door je hoofd gaat.
+                    </p>
+                    <div className="mt-6 flex flex-wrap justify-center gap-2">
                       {QUICK_PROMPTS.map((prompt) => (
                         <button
                           key={prompt}
                           onClick={() => handleSendMessage(prompt)}
-                          className="text-xs bg-white border border-sage-200 hover:border-primary hover:text-primary transition-all px-4 py-2.5 rounded-2xl text-sage-600 shadow-sm text-left max-w-full"
+                          className="text-xs bg-white border border-sage-200 hover:border-primary hover:text-primary transition-all px-4 py-2.5 rounded-2xl text-sage-600 shadow-sm text-left"
                         >
                           {prompt}
                         </button>
@@ -141,15 +151,16 @@ export function AnonymousChat() {
                     </div>
                   </div>
                 )}
+
                 {messages.map((m) => (
-                  <div 
-                    key={m.id} 
+                  <div
+                    key={m.id}
                     className={`flex ${m.sender_type === 'user' ? 'justify-end' : 'justify-start'}`}
                   >
-                    <div 
+                    <div
                       className={`max-w-[85%] p-4 rounded-2xl text-sm shadow-sm leading-relaxed ${
-                        m.sender_type === 'user' 
-                          ? 'bg-primary text-white rounded-tr-none' 
+                        m.sender_type === 'user'
+                          ? 'bg-primary text-white rounded-tr-none'
                           : 'bg-white text-sage-900 border border-sage-100 rounded-tl-none'
                       }`}
                     >
@@ -167,6 +178,7 @@ export function AnonymousChat() {
                     </div>
                   </div>
                 ))}
+
                 {isTyping && (
                   <div className="flex justify-start">
                     <div className="bg-white border border-sage-100 p-4 rounded-2xl rounded-tl-none shadow-sm">
@@ -181,8 +193,8 @@ export function AnonymousChat() {
                 <div ref={messagesEndRef} />
               </CardContent>
 
-              <div className="p-5 bg-white border-t border-sage-100">
-                <form onSubmit={onFormSubmit} className="flex space-x-2">
+              <div className="p-4 bg-white border-t border-sage-100">
+                <form onSubmit={onFormSubmit} className="flex gap-2">
                   <input
                     type="text"
                     value={inputText}
@@ -190,16 +202,16 @@ export function AnonymousChat() {
                     placeholder="Typ je bericht..."
                     className="flex-grow p-3.5 rounded-2xl bg-sage-50 border-none focus:ring-2 focus:ring-primary/20 text-sm outline-none transition-all"
                   />
-                  <Button 
-                    type="submit" 
-                    size="icon" 
-                    className="h-12 w-12 rounded-2xl bg-primary hover:bg-primary-dim shadow-md transition-all active:scale-95" 
+                  <Button
+                    type="submit"
+                    size="icon"
+                    className="h-12 w-12 rounded-2xl bg-primary hover:bg-primary-dim shadow-md transition-all active:scale-95"
                     disabled={!inputText.trim()}
                   >
-                    <Send className="h-5.5 w-5.5 text-white" />
+                    <Send className="h-5 w-5 text-white" />
                   </Button>
                 </form>
-                <p className="text-[10px] text-sage-400 mt-3 text-center">
+                <p className="text-[10px] text-sage-400 mt-2.5 text-center">
                   In deze demo reageert een Buddy automatisch.
                 </p>
               </div>
@@ -208,38 +220,58 @@ export function AnonymousChat() {
         )}
       </AnimatePresence>
 
-      <div className="relative group">
+      {/* Knop-rij: tooltip links, knop rechts */}
+      <div className="flex items-end justify-end gap-3">
         <AnimatePresence>
           {!isOpen && showTooltip && (
-            <motion.div 
-              initial={{ opacity: 0, x: 20 }}
+            <motion.div
+              initial={{ opacity: 0, x: 12 }}
               animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: 20 }}
-              className="absolute bottom-20 right-0 mb-2 mr-2 bg-white p-4 rounded-2xl shadow-xl border border-primary/10 w-[220px] pointer-events-none"
+              exit={{ opacity: 0, x: 12 }}
+              transition={{ duration: 0.2 }}
+              className="relative bg-white rounded-2xl shadow-xl border border-outline-variant/20 p-4 w-[230px] mb-2"
             >
-              <p className="text-sm font-medium text-sage-900 leading-snug">
-                Direct anoniem chatten met een Buddy? Klik hier!
+              <button
+                onClick={() => setShowTooltip(false)}
+                className="absolute top-2.5 right-2.5 text-sage-400 hover:text-sage-700 transition-colors"
+              >
+                <X className="h-3.5 w-3.5" />
+              </button>
+              <p className="text-sm font-bold text-on-background mb-1 pr-4">
+                Zit je met vragen?
               </p>
-              <div className="absolute bottom-[-8px] right-6 w-4 h-4 bg-white border-r border-b border-primary/10 rotate-45" />
+              <p className="text-xs text-on-surface-variant leading-relaxed">
+                Chat anoniem met een buddy. Geen aanmelding, geen naam — gewoon een luisterend oor.
+              </p>
+              {/* Staartje naar rechts */}
+              <div className="absolute -right-2 bottom-5 w-4 h-4 bg-white border-t border-r border-outline-variant/20 rotate-45" />
             </motion.div>
           )}
         </AnimatePresence>
-        
-        <Button 
+
+        <button
           onClick={() => {
             setIsOpen(!isOpen);
             setShowTooltip(false);
           }}
           className={`h-16 w-16 rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 ${
-            isOpen ? 'bg-sage-200 hover:bg-sage-300' : 'bg-primary hover:bg-primary-dim hover:scale-105 active:scale-95'
+            isOpen
+              ? 'bg-surface-container-highest hover:bg-surface-variant'
+              : 'bg-primary hover:bg-primary-dim hover:scale-105 active:scale-95'
           }`}
         >
           {isOpen ? (
-            <X className="h-8 w-8 text-sage-700" />
+            <X className="h-7 w-7 text-on-surface" />
           ) : (
-            <MessageCircle className="h-8 w-8 text-white" />
+            <Image
+              src="/images/favicon en icon voor logo.png"
+              alt="Chat openen"
+              width={40}
+              height={40}
+              className="h-10 w-10 rounded-xl"
+            />
           )}
-        </Button>
+        </button>
       </div>
     </div>
   );
