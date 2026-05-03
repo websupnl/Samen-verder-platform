@@ -9,6 +9,7 @@ export default function OverOnsPage() {
         description="Samen Verder is er voor ouders die steun, overzicht en menselijk contact zoeken in een ingewikkelde periode."
         image="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?auto=format&fit=crop&q=80&w=1200"
         imageAlt="Mensen die samenwerken aan een gemeenschappelijk doel"
+        imageFullBleed
       />
 
       <section className="mx-auto w-full max-w-7xl px-4 py-16 sm:py-24">

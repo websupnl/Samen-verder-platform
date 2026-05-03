@@ -14,6 +14,7 @@ export default function ProfessionalsPage() {
         description="Werk samen met ons om de ondersteuning voor ouders in uw regio te versterken. Een innovatieve aanpak voor vrijwillige inzet en matching."
         image="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&q=80&w=1200"
         imageAlt="Professionals in overleg"
+        imageFullBleed
       >
         <div className="flex gap-4">
           <Button asChild size="lg" className="bg-primary hover:bg-sage-500">

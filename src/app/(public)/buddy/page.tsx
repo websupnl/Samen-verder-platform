@@ -15,6 +15,7 @@ export default function BuddyPage() {
         description="Maak een verschil in het leven van een ouder. Jouw tijd en aandacht kunnen de wereld betekenen voor iemand die het even moeilijk heeft."
         image="https://images.unsplash.com/photo-1531545514256-b1400bc00f31?auto=format&fit=crop&q=80&w=1200"
         imageAlt="Twee mensen in een vriendelijk gesprek"
+        imageFullBleed
       >
         <Button asChild size="lg" variant="secondary" className="bg-white text-primary hover:bg-sage-50">
           <Link href="/aanmelden">Meld je aan als buddy</Link>
