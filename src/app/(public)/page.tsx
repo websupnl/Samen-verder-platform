@@ -235,7 +235,7 @@ export default function Home() {
               <Image
                 alt="Subtiele abstracte illustratie over steun en verbinding"
                 className="absolute inset-0 w-full h-full object-cover"
-                src="https://images.unsplash.com/photo-1544027993-37dbfe43562a?auto=format&fit=crop&q=80&w=1000"
+                src="/images/two-women-talking-and-writing-at-a-table-2026-01-08-08-25-58-utc.jpg"
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />
