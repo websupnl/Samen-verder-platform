@@ -1,5 +1,8 @@
+"use client";
+
 import { ReactNode } from "react";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 type PublicPageHeroProps = {
   title: string;
@@ -10,6 +13,40 @@ type PublicPageHeroProps = {
   imageAlt?: string;
   imageFullBleed?: boolean;
 };
+
+const heroVariants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.12, delayChildren: 0.1 } },
+};
+
+const heroItem = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.25, 0.1, 0.25, 1] } },
+};
+
+const heroImage = {
+  hidden: { opacity: 0, scale: 1.03 },
+  visible: { opacity: 1, scale: 1, transition: { duration: 0.8, ease: [0.25, 0.1, 0.25, 1] } },
+};
+
+function HeroText({ title, description, children, isCenter }: { title: string; description: string; children?: ReactNode; isCenter: boolean }) {
+  return (
+    <motion.div
+      variants={heroVariants}
+      initial="hidden"
+      animate="visible"
+      className={isCenter ? "mx-auto max-w-xl text-center" : "max-w-xl"}
+    >
+      <motion.h1 variants={heroItem} className="text-4xl font-bold tracking-tight sm:text-5xl">
+        {title}
+      </motion.h1>
+      <motion.p variants={heroItem} className="mt-6 text-xl leading-8 text-sage-200">
+        {description}
+      </motion.p>
+      {children ? <motion.div variants={heroItem} className="mt-10">{children}</motion.div> : null}
+    </motion.div>
+  );
+}
 
 export function PublicPageHero({
   title,
@@ -25,8 +62,12 @@ export function PublicPageHero({
   if (image && imageFullBleed) {
     return (
       <section className="bg-sage-900 text-white overflow-hidden relative min-h-[480px] flex items-center">
-        {/* Foto tot aan de rechterrand */}
-        <div className="absolute inset-y-0 right-0 w-1/2 hidden lg:block">
+        <motion.div
+          variants={heroImage}
+          initial="hidden"
+          animate="visible"
+          className="absolute inset-y-0 right-0 w-1/2 hidden lg:block"
+        >
           <Image
             src={image}
             alt={imageAlt}
@@ -36,15 +77,12 @@ export function PublicPageHero({
             sizes="50vw"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-sage-900 via-sage-900/40 to-transparent" />
-        </div>
+        </motion.div>
 
-        {/* Tekst in container */}
         <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
-          <div className={`max-w-xl ${isCenter ? "mx-auto text-center" : ""}`}>
-            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">{title}</h1>
-            <p className="mt-6 text-xl leading-8 text-sage-200">{description}</p>
-            {children ? <div className="mt-10">{children}</div> : null}
-          </div>
+          <HeroText title={title} description={description} isCenter={isCenter}>
+            {children}
+          </HeroText>
         </div>
       </section>
     );
@@ -56,13 +94,16 @@ export function PublicPageHero({
         <div className="mx-auto max-w-7xl">
           <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[480px]">
             <div className={`px-4 sm:px-6 lg:px-8 py-16 sm:py-24 flex items-center ${isCenter ? "justify-center" : ""}`}>
-              <div className={isCenter ? "max-w-xl text-center" : "max-w-xl"}>
-                <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">{title}</h1>
-                <p className="mt-6 text-xl leading-8 text-sage-200">{description}</p>
-                {children ? <div className="mt-10">{children}</div> : null}
-              </div>
+              <HeroText title={title} description={description} isCenter={isCenter}>
+                {children}
+              </HeroText>
             </div>
-            <div className="relative hidden lg:block">
+            <motion.div
+              variants={heroImage}
+              initial="hidden"
+              animate="visible"
+              className="relative hidden lg:block"
+            >
               <Image
                 src={image}
                 alt={imageAlt}
@@ -72,7 +113,7 @@ export function PublicPageHero({
                 sizes="50vw"
               />
               <div className="absolute inset-0 bg-gradient-to-r from-sage-900/60 to-sage-900/10" />
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -82,11 +123,9 @@ export function PublicPageHero({
   return (
     <section className="bg-sage-900 py-16 sm:py-24 text-white">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className={isCenter ? "mx-auto max-w-3xl text-center" : "max-w-3xl"}>
-          <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">{title}</h1>
-          <p className="mt-6 text-xl leading-8 text-sage-200">{description}</p>
-          {children ? <div className="mt-10">{children}</div> : null}
-        </div>
+        <HeroText title={title} description={description} isCenter={isCenter}>
+          {children}
+        </HeroText>
       </div>
     </section>
   );

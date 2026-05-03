@@ -22,6 +22,7 @@ export const metadata: Metadata = {
 };
 
 import { AnonymousChat } from "@/components/shared/AnonymousChat";
+import { Providers } from "@/components/Providers";
 
 export default function RootLayout({
   children,
@@ -40,8 +41,10 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col font-body bg-background text-on-background">
-        {children}
-        <AnonymousChat />
+        <Providers>
+          {children}
+          <AnonymousChat />
+        </Providers>
       </body>
     </html>
   );

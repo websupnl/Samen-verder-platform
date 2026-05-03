@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { PublicPageHero } from "@/components/shared/PublicPageHero";
+import { FadeUp, ScaleIn } from "@/components/ui/Animate";
 
 export default function OverOnsPage() {
   return (
@@ -14,7 +15,7 @@ export default function OverOnsPage() {
 
       <section className="mx-auto w-full max-w-7xl px-4 py-16 sm:py-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-          <div className="prose prose-sage lg:prose-lg">
+          <FadeUp className="prose prose-sage lg:prose-lg">
             <p>
               Samen Verder is ontstaan uit de behoefte aan meer verbinding en steun tussen ouders.
               Wij geloven dat niemand er alleen voor hoeft te staan en dat een klein gebaar van een
@@ -30,9 +31,9 @@ export default function OverOnsPage() {
               Een samenleving waarin we weer naar elkaar omkijken en waarin het vragen om hulp
               wordt gezien als een teken van kracht.
             </p>
-          </div>
+          </FadeUp>
           <div className="space-y-6">
-            <div className="relative h-72 rounded-3xl overflow-hidden shadow-lg">
+            <ScaleIn className="relative h-72 rounded-3xl overflow-hidden shadow-lg">
               <Image
                 src="https://images.unsplash.com/photo-1516534775068-ba3e7458af70?auto=format&fit=crop&q=80&w=900"
                 alt="Handen die elkaar vasthouden als teken van steun"
@@ -40,8 +41,8 @@ export default function OverOnsPage() {
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />
-            </div>
-            <div className="relative h-48 rounded-3xl overflow-hidden shadow-lg">
+            </ScaleIn>
+            <ScaleIn className="relative h-48 rounded-3xl overflow-hidden shadow-lg">
               <Image
                 src="https://images.unsplash.com/photo-1573497701836-9bc9daa1d0da?auto=format&fit=crop&q=80&w=900"
                 alt="Warm gesprek in een rustige omgeving"
@@ -49,7 +50,7 @@ export default function OverOnsPage() {
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />
-            </div>
+            </ScaleIn>
           </div>
         </div>
       </section>

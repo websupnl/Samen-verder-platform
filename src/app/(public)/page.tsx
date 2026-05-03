@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { TrustBadgesSection } from "@/components/shared/TrustBadgesSection";
 import { FaqAccordion } from "@/components/shared/FaqAccordion";
+import { FadeUp, Stagger, StaggerItem, ScaleIn } from "@/components/ui/Animate";
 
 export default function Home() {
   const faqs = [
@@ -109,83 +110,90 @@ export default function Home() {
       {/* SECTION 2: ERKENNING EN RUST */}
       <section className="py-12 md:py-24 bg-surface-container-low">
         <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-3xl md:text-4xl font-extrabold text-on-background font-headline tracking-tight mb-8 md:mb-16 text-center">
-            Je hoeft dit niet alleen te dragen
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <FadeUp>
+            <h2 className="text-3xl md:text-4xl font-extrabold text-on-background font-headline tracking-tight mb-8 md:mb-16 text-center">
+              Je hoeft dit niet alleen te dragen
+            </h2>
+          </FadeUp>
+          <Stagger className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               "Je hoeft niet alles vandaag te begrijpen",
               "Boos, verdrietig of wantrouwig zijn is niet vreemd",
               "Je mag vragen stellen, ook als alles onduidelijk voelt",
               "Een buddy kan naast je staan zonder oordeel"
             ].map((text, i) => (
-              <div key={i} className="bg-surface p-8 rounded-[2rem] shadow-sm hover:shadow-md transition-all flex flex-col items-center text-center">
-                <div className="w-12 h-12 rounded-full bg-primary-container/30 text-primary flex items-center justify-center mb-6">
-                  <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>
-                    {["lightbulb", "sentiment_dissatisfied", "help_center", "volunteer_activism"][i]}
-                  </span>
+              <StaggerItem key={i}>
+                <div className="bg-surface p-8 rounded-[2rem] shadow-sm flex flex-col items-center text-center h-full">
+                  <div className="w-12 h-12 rounded-full bg-primary-container/30 text-primary flex items-center justify-center mb-6">
+                    <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>
+                      {["lightbulb", "sentiment_dissatisfied", "help_center", "volunteer_activism"][i]}
+                    </span>
+                  </div>
+                  <h3 className="text-lg font-bold text-on-background font-headline leading-snug">
+                    {text}
+                  </h3>
                 </div>
-                <h3 className="text-lg font-bold text-on-background font-headline leading-snug">
-                  {text}
-                </h3>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
         </div>
       </section>
 
       {/* SECTION 3: VOOR WIE IS SAMEN VERDER? */}
       <section className="py-16 md:py-32 bg-surface">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center max-w-3xl mx-auto mb-20">
+          <FadeUp className="text-center max-w-3xl mx-auto mb-20">
             <h2 className="text-3xl md:text-4xl font-extrabold text-on-background font-headline tracking-tight mb-6">
               Voor wie is Samen Verder?
             </h2>
             <p className="text-lg text-on-surface-variant font-body">
               Samen Verder is er voor ouders die steun zoeken, voor professionals die willen doorverwijzen en voor mensen die als buddy iets voor een ander willen betekenen.
             </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Ouders */}
-            <div className="bg-surface-container-low rounded-[2.5rem] p-10 flex flex-col h-full hover:bg-surface-container-high transition-colors">
-              <div className="w-16 h-16 rounded-2xl bg-primary-container flex items-center justify-center text-on-primary-container mb-8">
-                <span className="material-symbols-outlined text-3xl">family_restroom</span>
+          </FadeUp>
+          <Stagger className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <StaggerItem>
+              <div className="bg-surface-container-low rounded-[2.5rem] p-10 flex flex-col h-full hover:bg-surface-container-high transition-colors">
+                <div className="w-16 h-16 rounded-2xl bg-primary-container flex items-center justify-center text-on-primary-container mb-8">
+                  <span className="material-symbols-outlined text-3xl">family_restroom</span>
+                </div>
+                <h3 className="text-2xl font-bold text-on-background font-headline mb-4">Voor ouders</h3>
+                <p className="text-on-surface-variant font-body mb-8 flex-grow">
+                  Zoek je rust, overzicht en iemand die zonder oordeel met je meedenkt? Een buddy kan je helpen tijdens een moeilijke en verwarrende periode.
+                </p>
+                <Link href="/ouders" className="inline-flex items-center text-primary font-bold font-headline">
+                  Lees meer <span className="material-symbols-outlined ml-1">arrow_forward</span>
+                </Link>
               </div>
-              <h3 className="text-2xl font-bold text-on-background font-headline mb-4">Voor ouders</h3>
-              <p className="text-on-surface-variant font-body mb-8 flex-grow">
-                Zoek je rust, overzicht en iemand die zonder oordeel met je meedenkt? Een buddy kan je helpen tijdens een moeilijke en verwarrende periode.
-              </p>
-              <Link href="/ouders" className="inline-flex items-center text-primary font-bold hover:gap-2 transition-all font-headline">
-                Lees meer <span className="material-symbols-outlined ml-1">arrow_forward</span>
-              </Link>
-            </div>
-            {/* Professionals */}
-            <div className="bg-surface-container-low rounded-[2.5rem] p-10 flex flex-col h-full hover:bg-surface-container-high transition-colors">
-              <div className="w-16 h-16 rounded-2xl bg-secondary-container flex items-center justify-center text-on-secondary-container mb-8">
-                <span className="material-symbols-outlined text-3xl">medical_services</span>
+            </StaggerItem>
+            <StaggerItem>
+              <div className="bg-surface-container-low rounded-[2.5rem] p-10 flex flex-col h-full hover:bg-surface-container-high transition-colors">
+                <div className="w-16 h-16 rounded-2xl bg-secondary-container flex items-center justify-center text-on-secondary-container mb-8">
+                  <span className="material-symbols-outlined text-3xl">medical_services</span>
+                </div>
+                <h3 className="text-2xl font-bold text-on-background font-headline mb-4">Voor professionals</h3>
+                <p className="text-on-surface-variant font-body mb-8 flex-grow">
+                  Werk je bij een wijkteam, jeugdhulporganisatie, school, pleegzorgorganisatie of als sociaal werker? Bekijk wanneer verwijzen zinvol is en hoe aanmelden werkt.
+                </p>
+                <Link href="/professionals" className="inline-flex items-center text-primary font-bold font-headline">
+                  Voor professionals <span className="material-symbols-outlined ml-1">arrow_forward</span>
+                </Link>
               </div>
-              <h3 className="text-2xl font-bold text-on-background font-headline mb-4">Voor professionals</h3>
-              <p className="text-on-surface-variant font-body mb-8 flex-grow">
-                Werk je bij een wijkteam, jeugdhulporganisatie, school, pleegzorgorganisatie of als sociaal werker? Bekijk wanneer verwijzen zinvol is en hoe aanmelden werkt.
-              </p>
-              <Link href="/professionals" className="inline-flex items-center text-primary font-bold hover:gap-2 transition-all font-headline">
-                Voor professionals <span className="material-symbols-outlined ml-1">arrow_forward</span>
-              </Link>
-            </div>
-            {/* Buddy worden */}
-            <div className="bg-surface-container-low rounded-[2.5rem] p-10 flex flex-col h-full hover:bg-surface-container-high transition-colors">
-              <div className="w-16 h-16 rounded-2xl bg-tertiary-container flex items-center justify-center text-on-tertiary-container mb-8">
-                <span className="material-symbols-outlined text-3xl">handshake</span>
+            </StaggerItem>
+            <StaggerItem>
+              <div className="bg-surface-container-low rounded-[2.5rem] p-10 flex flex-col h-full hover:bg-surface-container-high transition-colors">
+                <div className="w-16 h-16 rounded-2xl bg-tertiary-container flex items-center justify-center text-on-tertiary-container mb-8">
+                  <span className="material-symbols-outlined text-3xl">handshake</span>
+                </div>
+                <h3 className="text-2xl font-bold text-on-background font-headline mb-4">Buddy worden</h3>
+                <p className="text-on-surface-variant font-body mb-8 flex-grow">
+                  Wil jij als ervaringsdeskundige of betrokken ondersteuner iets betekenen voor ouders in een moeilijke periode? Lees wat de rol inhoudt en hoe aanmelden werkt.
+                </p>
+                <Link href="/buddy" className="inline-flex items-center text-primary font-bold font-headline">
+                  Meld je aan <span className="material-symbols-outlined ml-1">arrow_forward</span>
+                </Link>
               </div>
-              <h3 className="text-2xl font-bold text-on-background font-headline mb-4">Buddy worden</h3>
-              <p className="text-on-surface-variant font-body mb-8 flex-grow">
-                Wil jij als ervaringsdeskundige of betrokken ondersteuner iets betekenen voor ouders in een moeilijke periode? Lees wat de rol inhoudt en hoe aanmelden werkt.
-              </p>
-              <Link href="/buddy" className="inline-flex items-center text-primary font-bold hover:gap-2 transition-all font-headline">
-                Meld je aan <span className="material-symbols-outlined ml-1">arrow_forward</span>
-              </Link>
-            </div>
-          </div>
+            </StaggerItem>
+          </Stagger>
         </div>
       </section>
 
@@ -193,7 +201,7 @@ export default function Home() {
       <section className="py-12 md:py-24 bg-surface-container-lowest">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div>
+            <FadeUp>
               <h2 className="text-3xl md:text-4xl font-extrabold text-on-background font-headline tracking-tight mb-6">
                 Wat is een buddy?
               </h2>
@@ -230,8 +238,8 @@ export default function Home() {
                   </ul>
                 </div>
               </div>
-            </div>
-            <div className="relative h-[600px] rounded-[3rem] overflow-hidden">
+            </FadeUp>
+            <ScaleIn className="relative h-[600px] rounded-[3rem] overflow-hidden">
               <Image
                 alt="Subtiele abstracte illustratie over steun en verbinding"
                 className="absolute inset-0 w-full h-full object-cover"
@@ -239,7 +247,7 @@ export default function Home() {
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />
-            </div>
+            </ScaleIn>
           </div>
         </div>
       </section>
@@ -249,62 +257,64 @@ export default function Home() {
       {/* SECTION 5: WAT HEB JE AAN EEN BUDDY? */}
       <section className="py-16 md:py-32 bg-surface">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center max-w-3xl mx-auto mb-20">
+          <FadeUp className="text-center max-w-3xl mx-auto mb-20">
             <h2 className="text-3xl md:text-4xl font-extrabold text-on-background font-headline tracking-tight mb-6">
               Wat kan een buddy voor je betekenen?
             </h2>
             <p className="text-lg text-on-surface-variant font-body">
               Een buddy verandert de situatie niet in één keer, maar kan wel helpen om rust, overzicht en steun te ervaren in een moeilijke periode.
             </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          </FadeUp>
+          <Stagger className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
               { title: "Meer rust en overzicht", text: "Samen kijken naar wat er speelt en wat je volgende stap kan zijn." },
               { title: "Steun in gewone taal", text: "Uitleg zonder moeilijke woorden of onduidelijke regels." },
               { title: "Hulp bij gesprekken", text: "Voorbereiden op gesprekken en vragen op een rij zetten." },
-              { title: "Je minder alleen voelen", text: "Iemand die naast je staat and met je meedenkt." }
+              { title: "Je minder alleen voelen", text: "Iemand die naast je staat en met je meedenkt." }
             ].map((benefit, i) => (
-              <div key={i} className="p-8 rounded-[2rem] bg-surface-container-low border border-outline-variant/20">
-                <div className="w-12 h-12 rounded-full bg-primary/10 text-primary flex items-center justify-center mb-6">
-                  <span className="material-symbols-outlined">
-                    {["filter_hdr", "chat_bubble", "groups", "diversity_1"][i]}
-                  </span>
+              <StaggerItem key={i}>
+                <div className="p-8 rounded-[2rem] bg-surface-container-low border border-outline-variant/20 h-full">
+                  <div className="w-12 h-12 rounded-full bg-primary/10 text-primary flex items-center justify-center mb-6">
+                    <span className="material-symbols-outlined">
+                      {["filter_hdr", "chat_bubble", "groups", "diversity_1"][i]}
+                    </span>
+                  </div>
+                  <h3 className="text-xl font-bold text-on-background font-headline mb-4">{benefit.title}</h3>
+                  <p className="text-on-surface-variant font-body text-sm leading-relaxed">
+                    {benefit.text}
+                  </p>
                 </div>
-                <h3 className="text-xl font-bold text-on-background font-headline mb-4">{benefit.title}</h3>
-                <p className="text-on-surface-variant font-body text-sm leading-relaxed">
-                  {benefit.text}
-                </p>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
         </div>
       </section>
 
       {/* SECTION 6: HOE WERKT HET? */}
       <section className="py-32 bg-surface-container-low">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center max-w-3xl mx-auto mb-20">
+          <FadeUp className="text-center max-w-3xl mx-auto mb-20">
             <h2 className="text-3xl md:text-4xl font-extrabold text-on-background font-headline tracking-tight mb-6">
               Hoe werkt het?
             </h2>
             <p className="text-lg text-on-surface-variant font-body">
               In vier duidelijke stappen kijken we samen welke ondersteuning past. We streven ernaar om binnen 48 uur contact op te nemen.
             </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-20">
+          </FadeUp>
+          <Stagger className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-20">
             {[
               { title: "Aanmelden", text: "Je kunt jezelf aanmelden of eerst anoniem contact opnemen. Ook een professional kan iemand aanmelden." },
               { title: "Kort kennismakingsgesprek", text: "We luisteren naar je situatie en kijken rustig met je mee naar wat je nodig hebt." },
               { title: "Koppeling aan een buddy", text: "We zoeken een buddy die past bij jouw situatie, vraag of behoefte." },
               { title: "Ondersteuning op maat", text: "Het contact kan bestaan uit luisteren, uitleg geven, samen voorbereiden of helpen overzicht te houden." }
             ].map((step, i) => (
-              <div key={i} className="relative">
+              <StaggerItem key={i} className="relative">
                 <div className="text-6xl font-black text-primary/10 font-headline mb-4">{i + 1}</div>
                 <h3 className="text-xl font-bold text-on-background font-headline mb-3">{step.title}</h3>
                 <p className="text-on-surface-variant font-body text-sm leading-relaxed">{step.text}</p>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {[
               { label: "Reactietijd", value: "We proberen binnen 48 uur contact op te nemen" },
@@ -379,15 +389,15 @@ export default function Home() {
       {/* SECTION 8: SITUATIEHULP */}
       <section id="duidelijkheid" className="py-16 md:py-32 bg-surface">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="mb-8 md:mb-16 max-w-2xl">
+          <FadeUp className="mb-8 md:mb-16 max-w-2xl">
             <h2 className="text-3xl md:text-4xl font-extrabold text-on-background font-headline tracking-tight mb-6">
               Waar wil je nu duidelijkheid over?
             </h2>
             <p className="text-lg text-on-surface-variant font-body">
               Kies wat nu speelt. Dan krijg je uitleg, eerste stappen en vragen die je kunt stellen aan de mensen die betrokken zijn.
             </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          </FadeUp>
+          <Stagger className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               {
                 title: "Ik heb een brief of beslissing gekregen",
@@ -420,7 +430,8 @@ export default function Home() {
                 icon: "balance"
               }
             ].map((topic, i) => (
-              <Link key={i} href={topic.href} className="group p-8 rounded-3xl bg-surface-container-low hover:bg-primary-container/20 transition-all border border-outline-variant/10 min-h-48 flex flex-col justify-between">
+              <StaggerItem key={i}>
+              <Link href={topic.href} className="group p-8 rounded-3xl bg-surface-container-low hover:bg-primary-container/20 transition-all border border-outline-variant/10 min-h-48 flex flex-col justify-between">
                 <div>
                   <div className="mb-6 h-12 w-12 rounded-2xl bg-primary-container text-on-primary-container flex items-center justify-center group-hover:bg-primary group-hover:text-on-primary transition-colors">
                     <span className="material-symbols-outlined">
@@ -438,7 +449,9 @@ export default function Home() {
                   </p>
                 </div>
               </Link>
+              </StaggerItem>
             ))}
+            <StaggerItem>
             <button
               type="button"
               onClick={() => window.dispatchEvent(new CustomEvent('open-anonymous-chat'))}
@@ -461,7 +474,8 @@ export default function Home() {
                 </p>
               </div>
             </button>
-          </div>
+            </StaggerItem>
+          </Stagger>
         </div>
       </section>
 
@@ -469,7 +483,7 @@ export default function Home() {
       <section className="py-32 bg-surface-container-low">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-            <div className="relative h-[600px] rounded-[3rem] overflow-hidden order-2 lg:order-1 shadow-2xl">
+            <ScaleIn className="relative h-[600px] rounded-[3rem] overflow-hidden order-2 lg:order-1 shadow-2xl">
               <Image
                 alt="Professional in overleg"
                 className="absolute inset-0 w-full h-full object-cover"
@@ -477,8 +491,8 @@ export default function Home() {
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />
-            </div>
-            <div className="order-1 lg:order-2">
+            </ScaleIn>
+            <FadeUp className="order-1 lg:order-2">
               <h2 className="text-3xl md:text-4xl font-extrabold text-on-background font-headline tracking-tight mb-6">
                 Voor professionals en organisaties
               </h2>
@@ -507,7 +521,7 @@ export default function Home() {
               <p className="mt-8 text-on-surface-variant/60 text-xs font-body italic">
                 Dit platform laat zien hoe ondersteuning en doorverwijzing digitaal toegankelijk gemaakt kunnen worden.
               </p>
-            </div>
+            </FadeUp>
           </div>
         </div>
       </section>
@@ -516,7 +530,7 @@ export default function Home() {
       <section className="py-16 md:py-32 bg-surface">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div>
+            <FadeUp>
               <div className="inline-flex items-center px-4 py-2 rounded-full bg-tertiary-container/50 text-on-tertiary-container text-sm font-medium mb-8 font-headline">
                 <span className="material-symbols-outlined text-lg mr-2" style={{ fontVariationSettings: "'FILL' 1" }}>
                   school
@@ -547,8 +561,8 @@ export default function Home() {
               <Link href="/training" className="inline-flex items-center text-primary font-bold hover:gap-2 transition-all font-headline">
                 Bekijk de training <span className="material-symbols-outlined ml-1">arrow_forward</span>
               </Link>
-            </div>
-            <div className="relative h-[500px] rounded-[3rem] overflow-hidden shadow-2xl">
+            </FadeUp>
+            <ScaleIn className="relative h-[500px] rounded-[3rem] overflow-hidden shadow-2xl">
               <Image
                 alt="Buddies in training samen"
                 className="absolute inset-0 w-full h-full object-cover"
@@ -561,7 +575,7 @@ export default function Home() {
                 <p className="text-on-background font-bold font-headline mb-1">Geen ervaring vereist</p>
                 <p className="text-on-surface-variant text-sm font-body">Empathie en de wil om te luisteren zijn waardevoller dan een diploma.</p>
               </div>
-            </div>
+            </ScaleIn>
           </div>
         </div>
       </section>
@@ -569,28 +583,33 @@ export default function Home() {
       {/* SECTION 12: FAQ PREVIEW */}
       <section className="py-16 md:py-32 bg-surface">
         <div className="max-w-4xl mx-auto px-6">
-          <h2 className="text-3xl md:text-4xl font-extrabold text-on-background font-headline tracking-tight mb-8 md:mb-16 text-center">
-            Veelgestelde vragen
-          </h2>
-          <FaqAccordion items={faqs} className="mb-16" />
+          <FadeUp>
+            <h2 className="text-3xl md:text-4xl font-extrabold text-on-background font-headline tracking-tight mb-8 md:mb-16 text-center">
+              Veelgestelde vragen
+            </h2>
+          </FadeUp>
+          <FadeUp delay={0.1}>
+            <FaqAccordion items={faqs} className="mb-16" />
           <div className="text-center">
-            <Link href="/faq" className="inline-flex items-center text-primary font-bold hover:gap-2 transition-all font-headline">
+            <Link href="/faq" className="inline-flex items-center text-primary font-bold font-headline">
               Bekijk alle vragen <span className="material-symbols-outlined ml-1">arrow_forward</span>
             </Link>
-          </div>
+          </FadeUp>
         </div>
       </section>
 
       {/* SECTION 13: FINAL CTA */}
       <section className="py-16 md:py-32 bg-primary-container/30">
         <div className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="text-4xl md:text-5xl font-extrabold text-on-background font-headline tracking-tight mb-8 leading-tight">
-            Je hoeft dit niet alleen te doen.
-          </h2>
-          <p className="text-xl text-on-surface-variant font-body mb-12 max-w-2xl mx-auto text-balance">
-            Kies de stap die nu bij je past. Wij zijn er wanneer jij er klaar voor bent.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-6 justify-center">
+          <FadeUp>
+            <h2 className="text-4xl md:text-5xl font-extrabold text-on-background font-headline tracking-tight mb-8 leading-tight">
+              Je hoeft dit niet alleen te doen.
+            </h2>
+            <p className="text-xl text-on-surface-variant font-body mb-12 max-w-2xl mx-auto text-balance">
+              Kies de stap die nu bij je past. Wij zijn er wanneer jij er klaar voor bent.
+            </p>
+          </FadeUp>
+          <FadeUp delay={0.15} className="flex flex-col sm:flex-row gap-6 justify-center">
             <Link href="/aanmelden" className="px-10 py-5 rounded-full bg-primary text-on-primary font-bold text-lg hover:bg-primary-dim shadow-xl shadow-primary/20 transition-all font-headline">
               Vraag een buddy aan
             </Link>
@@ -600,7 +619,7 @@ export default function Home() {
             >
               Praat eerst anoniem
             </button>
-          </div>
+          </FadeUp>
         </div>
       </section>
     </div>
