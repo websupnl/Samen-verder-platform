@@ -12,7 +12,7 @@ export default function ProfessionalsPage() {
       <PublicPageHero
         title="Voor Professionals & Partners"
         description="Werk samen met ons om de ondersteuning voor ouders in uw regio te versterken. Een innovatieve aanpak voor vrijwillige inzet en matching."
-        image="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&q=80&w=1200"
+        image="/images/business-meeting-with-handshake-in-a-bright-workpl-2026-01-09-11-36-35-utc.jpg"
         imageAlt="Professionals in overleg"
         imageFullBleed
       >
@@ -33,17 +33,6 @@ export default function ProfessionalsPage() {
         </div>
       </PublicPageHero>
 
-      {/* Sfeerfoto */}
-      <section className="relative h-72 md:h-96 overflow-hidden">
-        <Image
-          src="/images/business-meeting-with-handshake-in-a-bright-workpl-2026-01-09-11-36-35-utc.jpg"
-          alt="Business meeting met handshake"
-          fill
-          className="object-cover object-top"
-          sizes="100vw"
-        />
-        <div className="absolute inset-0 bg-sage-900/30" />
-      </section>
 
       <section className="py-12 md:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
