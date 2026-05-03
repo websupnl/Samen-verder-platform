@@ -16,36 +16,27 @@ export default function ProfessionalsPage() {
         imageAlt="Professionals in overleg"
         imageFullBleed
       >
-        <div className="flex gap-4">
-          <Button asChild size="lg" className="bg-primary hover:bg-sage-500">
+        <div className="flex flex-col gap-4">
+          <Button asChild size="lg" className="bg-primary hover:bg-sage-500 self-start">
             <Link href="/contact">Neem contact op</Link>
           </Button>
-          <div className="flex items-center space-x-2 text-sm text-sage-300">
+          <div className="flex items-center gap-3 text-sm text-sage-300">
             <span>In samenwerking met</span>
             <Image
               src="/images/WebsUp.nl logo wit.png"
               alt="WebsUp.nl"
               width={120}
               height={41}
-              className="h-14 w-auto"
+              className="h-10 w-auto"
             />
           </div>
         </div>
       </PublicPageHero>
 
-      <section className="py-24">
+      <section className="py-12 md:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div>
-              <div className="relative h-64 rounded-3xl overflow-hidden shadow-lg mb-10">
-                <Image
-                  src="https://images.unsplash.com/photo-1560472355-536de3962603?auto=format&fit=crop&q=80&w=900"
-                  alt="Professionals in vergadering"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                />
-              </div>
               <h2 className="text-3xl font-bold text-sage-900">Waarom partner worden?</h2>
               <p className="mt-4 text-lg text-sage-600 leading-relaxed">
                 Samen Verder biedt een gestructureerde en veilige manier om 
@@ -107,7 +98,7 @@ export default function ProfessionalsPage() {
 
       <TrustBadgesSection />
 
-      <section className="bg-white py-24 border-t border-sage-100">
+      <section className="bg-white py-12 md:py-24 border-t border-sage-100">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
           <div className="flex flex-col items-center">
             <h2 className="text-2xl font-bold text-sage-900 mb-6">Technologie van</h2>
