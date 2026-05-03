@@ -107,9 +107,9 @@ export default function Home() {
       </section>
 
       {/* SECTION 2: ERKENNING EN RUST */}
-      <section className="py-24 bg-surface-container-low">
+      <section className="py-12 md:py-24 bg-surface-container-low">
         <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-3xl md:text-4xl font-extrabold text-on-background font-headline tracking-tight mb-16 text-center">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-on-background font-headline tracking-tight mb-8 md:mb-16 text-center">
             Je hoeft dit niet alleen te dragen
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -135,7 +135,7 @@ export default function Home() {
       </section>
 
       {/* SECTION 3: VOOR WIE IS SAMEN VERDER? */}
-      <section className="py-32 bg-surface">
+      <section className="py-16 md:py-32 bg-surface">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center max-w-3xl mx-auto mb-20">
             <h2 className="text-3xl md:text-4xl font-extrabold text-on-background font-headline tracking-tight mb-6">
@@ -190,7 +190,7 @@ export default function Home() {
       </section>
 
       {/* SECTION 4: WAT IS EEN BUDDY? */}
-      <section className="py-24 bg-surface-container-lowest">
+      <section className="py-12 md:py-24 bg-surface-container-lowest">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
@@ -247,7 +247,7 @@ export default function Home() {
       <TrustBadgesSection />
 
       {/* SECTION 5: WAT HEB JE AAN EEN BUDDY? */}
-      <section className="py-32 bg-surface">
+      <section className="py-16 md:py-32 bg-surface">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center max-w-3xl mx-auto mb-20">
             <h2 className="text-3xl md:text-4xl font-extrabold text-on-background font-headline tracking-tight mb-6">
@@ -322,7 +322,7 @@ export default function Home() {
       </section>
 
       {/* SECTION 7: IK ZIT MIDDEN IN EEN UITHUISPLAATSING. WAT NU? */}
-      <section className="py-24 bg-surface px-6">
+      <section className="py-12 md:py-24 bg-surface px-6">
         <div className="max-w-7xl mx-auto bg-on-surface text-surface rounded-[3rem] p-10 md:p-20 relative overflow-hidden shadow-2xl">
           <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2"></div>
           <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
@@ -377,20 +377,15 @@ export default function Home() {
       </section>
 
       {/* SECTION 8: SITUATIEHULP */}
-      <section id="duidelijkheid" className="py-32 bg-surface">
+      <section id="duidelijkheid" className="py-16 md:py-32 bg-surface">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
-            <div className="max-w-2xl">
-              <h2 className="text-3xl md:text-4xl font-extrabold text-on-background font-headline tracking-tight mb-6">
-                Waar wil je nu duidelijkheid over?
-              </h2>
-              <p className="text-lg text-on-surface-variant font-body">
-                Kies wat nu speelt. Dan krijg je uitleg, eerste stappen en vragen die je kunt stellen aan de mensen die betrokken zijn.
-              </p>
-            </div>
-            <Link href="/hoe-werkt-het" className="inline-flex px-8 py-4 rounded-full bg-surface-container-high text-on-surface font-bold hover:bg-surface-container-highest transition-all font-headline">
-              Bekijk hoe het werkt
-            </Link>
+          <div className="mb-8 md:mb-16 max-w-2xl">
+            <h2 className="text-3xl md:text-4xl font-extrabold text-on-background font-headline tracking-tight mb-6">
+              Waar wil je nu duidelijkheid over?
+            </h2>
+            <p className="text-lg text-on-surface-variant font-body">
+              Kies wat nu speelt. Dan krijg je uitleg, eerste stappen en vragen die je kunt stellen aan de mensen die betrokken zijn.
+            </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
@@ -518,9 +513,9 @@ export default function Home() {
       </section>
 
       {/* SECTION 10: FAQ PREVIEW */}
-      <section className="py-32 bg-surface">
+      <section className="py-16 md:py-32 bg-surface">
         <div className="max-w-4xl mx-auto px-6">
-          <h2 className="text-3xl md:text-4xl font-extrabold text-on-background font-headline tracking-tight mb-16 text-center">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-on-background font-headline tracking-tight mb-8 md:mb-16 text-center">
             Veelgestelde vragen
           </h2>
           <FaqAccordion items={faqs} className="mb-16" />
@@ -533,7 +528,7 @@ export default function Home() {
       </section>
 
       {/* SECTION 11: FINAL CTA */}
-      <section className="py-32 bg-primary-container/30">
+      <section className="py-16 md:py-32 bg-primary-container/30">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <h2 className="text-4xl md:text-5xl font-extrabold text-on-background font-headline tracking-tight mb-8 leading-tight">
             Je hoeft dit niet alleen te doen.

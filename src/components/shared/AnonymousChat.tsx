@@ -87,7 +87,7 @@ export function AnonymousChat() {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-50">
+    <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50">
       {/* Chat venster */}
       <AnimatePresence>
         {isOpen && (
@@ -96,7 +96,7 @@ export function AnonymousChat() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
-            className="mb-4 w-full max-w-[400px] h-[600px] flex flex-col origin-bottom-right"
+            className="mb-4 w-[calc(100vw-2rem)] sm:w-full sm:max-w-[400px] h-[calc(100svh-7rem)] sm:h-[600px] flex flex-col origin-bottom-right"
           >
             <Card className="flex-grow flex flex-col shadow-2xl border-primary/20 overflow-hidden rounded-3xl">
               <CardHeader className="bg-primary text-white p-5 flex flex-row items-center justify-between">
@@ -229,7 +229,7 @@ export function AnonymousChat() {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: 12 }}
               transition={{ duration: 0.2 }}
-              className="relative bg-white rounded-2xl shadow-xl border border-outline-variant/20 p-4 w-[230px] mb-2"
+              className="relative hidden sm:block bg-white rounded-2xl shadow-xl border border-outline-variant/20 p-4 w-[230px] mb-2"
             >
               <button
                 onClick={() => setShowTooltip(false)}
