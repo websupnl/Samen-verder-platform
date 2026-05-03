@@ -235,7 +235,7 @@ export default function Home() {
               <Image
                 alt="Subtiele abstracte illustratie over steun en verbinding"
                 className="absolute inset-0 w-full h-full object-cover"
-                src="/images/wat is een buddy sectie home.png"
+                src="https://images.unsplash.com/photo-1544027993-37dbfe43562a?auto=format&fit=crop&q=80&w=1000"
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />
