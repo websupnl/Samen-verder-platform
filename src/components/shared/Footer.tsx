@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export const Footer = () => {
   return (
@@ -6,11 +7,17 @@ export const Footer = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-7xl mx-auto">
         {/* Brand & Copyright */}
         <div className="flex flex-col items-start">
-          <Link
-            className="text-xl font-bold text-on-background font-headline mb-4"
-            href="/"
-          >
-            Samen Verder
+          <Link href="/" className="flex items-center gap-2.5 mb-4">
+            <Image
+              src="/images/favicon en icon voor logo.png"
+              alt="Samen Verder"
+              width={40}
+              height={40}
+              className="h-10 w-10 rounded-xl"
+            />
+            <span className="text-xl font-bold text-on-background font-headline">
+              Samen Verder
+            </span>
           </Link>
           <p className="text-on-background/80 font-body text-sm leading-relaxed mb-8">
             Een veilige plek voor ouders. Wij bieden onafhankelijke steun, uitleg en een luisterend oor tijdens een ingrijpende periode.
