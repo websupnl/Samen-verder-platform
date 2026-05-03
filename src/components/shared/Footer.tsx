@@ -86,10 +86,25 @@ export const Footer = () => {
           </a>
         </div>
       </div>
-      <div className="max-w-7xl mx-auto mt-12 pt-8 border-t border-surface-dim/30">
-        <p className="text-on-background/60 font-body text-xs text-center">
+      <div className="max-w-7xl mx-auto mt-12 pt-8 border-t border-surface-dim/30 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <p className="text-on-background/60 font-body text-xs">
           © 2025 Samen Verder
         </p>
+        <a
+          href="https://websup.nl"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-2 opacity-60 hover:opacity-100 transition-opacity"
+        >
+          <span className="text-on-background/60 font-body text-xs">Website ontwikkeld door</span>
+          <Image
+            src="/images/WebsUp (1).png"
+            alt="WebsUp.nl"
+            width={80}
+            height={28}
+            className="h-7 w-auto"
+          />
+        </a>
       </div>
     </footer>
   );
