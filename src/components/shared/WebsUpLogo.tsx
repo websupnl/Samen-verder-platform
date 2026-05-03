@@ -7,7 +7,7 @@ type WebsUpLogoProps = {
 export function WebsUpLogo({ className = "" }: WebsUpLogoProps) {
   return (
     <Image
-      src="/images/websup-logo.png"
+      src="/images/websup-logo.svg"
       alt="WebsUp"
       width={241}
       height={82}
