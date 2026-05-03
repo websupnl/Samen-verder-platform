@@ -7,18 +7,17 @@ export const Navbar = () => {
   return (
     <nav className="docked full-width top-0 sticky z-50 bg-white/90 backdrop-blur-xl border-b border-outline-variant/20">
       <div className="flex justify-between items-center max-w-7xl mx-auto px-6 h-20">
-        <Link
-          className="flex items-center gap-2.5 text-2xl font-bold tracking-tight text-on-background font-headline"
-          href="/"
-        >
+        <Link href="/" className="flex items-center">
           <Image
             src="/images/favicon en icon voor logo.png"
-            alt="Samen Verder logo"
-            width={40}
-            height={40}
-            className="rounded-xl"
+            alt="Samen Verder"
+            width={48}
+            height={48}
+            className="h-12 w-auto"
           />
-          Samen Verder
+          <span className="ml-2.5 text-2xl font-extrabold tracking-tight text-on-background font-headline">
+            Samen Verder
+          </span>
         </Link>
         <div className="hidden md:flex items-center space-x-8">
           <Link

@@ -110,30 +110,35 @@ export default function ProfessionalsPage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
           <div className="flex flex-col items-center">
             <h2 className="text-2xl font-bold text-sage-900 mb-6">Technologie van</h2>
-            <div className="bg-sage-900 rounded-2xl px-8 py-5 mb-6">
-              <Image
-                src="/images/WebsUp.nl logo wit.png"
-                alt="WebsUp.nl"
-                width={240}
-                height={82}
-                className="h-16 w-auto"
-              />
-            </div>
+            <Image
+              src="/images/WebsUp (1).png"
+              alt="WebsUp.nl"
+              width={300}
+              height={120}
+              className="h-24 w-auto mb-6"
+            />
             <p className="text-sage-600 max-w-xl mb-10">
               Het Samen Verder platform draait op technologie die ontwikkeld is met focus op veiligheid, toegankelijkheid en gebruiksvriendelijkheid.
             </p>
             <div className="flex items-center space-x-8 opacity-50 hover:opacity-100 transition-all">
-              <div className="bg-sage-900 rounded-xl px-4 py-2">
-                <Image
-                  src="/images/WebsUp.nl logo wit.png"
-                  alt="WebsUp.nl"
-                  width={160}
-                  height={55}
-                  className="h-10 w-auto"
-                />
-              </div>
+              <Image
+                src="/images/WebsUp (1).png"
+                alt="WebsUp.nl"
+                width={160}
+                height={64}
+                className="h-14 w-auto"
+              />
               <div className="h-8 w-px bg-sage-200" />
-              <div className="text-xl font-bold italic text-sage-900">Samen Verder</div>
+              <div className="flex items-center gap-2">
+                <Image
+                  src="/images/favicon en icon voor logo.png"
+                  alt="Samen Verder"
+                  width={36}
+                  height={36}
+                  className="h-9 w-auto rounded-lg"
+                />
+                <div className="text-xl font-bold italic text-sage-900">Samen Verder</div>
+              </div>
             </div>
           </div>
         </div>
