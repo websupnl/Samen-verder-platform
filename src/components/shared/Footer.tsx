@@ -88,7 +88,7 @@ export const Footer = () => {
       </div>
       <div className="max-w-7xl mx-auto mt-12 pt-8 border-t border-surface-dim/30 flex flex-col sm:flex-row items-center justify-between gap-4">
         <p className="text-on-background/60 font-body text-xs">
-          © 2025 Samen Verder
+          © 2026 Samen Verder
         </p>
         <a
           href="https://websup.nl"
