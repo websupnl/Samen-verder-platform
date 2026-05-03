@@ -2,16 +2,15 @@ import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { PublicPageHero } from "@/components/shared/PublicPageHero";
 import { TrustBadgesSection } from "@/components/shared/TrustBadgesSection";
-import { WebsUpLogo } from "@/components/shared/WebsUpLogo";
-import { Building2, ClipboardList, TrendingUp } from "lucide-react";
+import { CheckCircle2, ArrowRight } from "lucide-react";
 import Link from "next/link";
 
 export default function ProfessionalsPage() {
   return (
     <div className="flex flex-col w-full">
       <PublicPageHero
-        title="Voor Professionals & Partners"
-        description="Werk samen met ons om de ondersteuning voor ouders in uw regio te versterken. Een innovatieve aanpak voor vrijwillige inzet en matching."
+        title="Voor professionals"
+        description="Werkt u met ouders die te maken hebben met een uithuisplaatsing? Samen Verder biedt laagdrempelige menselijke steun die aanvult wat u als professional kunt bieden."
         image="/images/business-meeting-with-handshake-in-a-bright-workpl-2026-01-09-11-36-35-utc.jpg"
         imageAlt="Professionals in overleg"
         imageFullBleed
@@ -33,72 +32,108 @@ export default function ProfessionalsPage() {
         </div>
       </PublicPageHero>
 
-
-      <section className="py-12 md:py-24">
+      {/* Wat is Samen Verder */}
+      <section className="py-12 md:py-24 bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-3xl font-bold text-sage-900">Waarom partner worden?</h2>
-              <p className="mt-4 text-lg text-sage-600 leading-relaxed">
-                Samen Verder biedt een gestructureerde en veilige manier om 
-                vrijwilligerswerk te organiseren. Wij ontlasten professionals door 
-                het matchingsproces te faciliteren en de voortgang te monitoren.
-              </p>
-              
-              <div className="mt-8 space-y-6">
-                {[
-                  {
-                    icon: TrendingUp,
-                    title: "Efficiëntie",
-                    text: "Minder administratieve lasten bij het matchen van ouders en buddies.",
-                  },
-                  {
-                    icon: Building2,
-                    title: "Schaalbaarheid",
-                    text: "Eenvoudig uit te rollen over meerdere wijken of gemeenten.",
-                  },
-                  {
-                    icon: ClipboardList,
-                    title: "Inzicht",
-                    text: "Anonieme rapportages over de impact en voortgang van trajecten.",
-                  },
-                ].map((item, i) => (
-                  <div key={i} className="flex space-x-4">
-                    <div className="shrink-0 h-10 w-10 rounded-lg bg-sage-100 text-primary flex items-center justify-center">
-                      <item.icon className="h-6 w-6" />
-                    </div>
-                    <div>
-                      <h4 className="font-bold text-sage-900">{item.title}</h4>
-                      <p className="text-sage-600 text-sm">{item.text}</p>
-                    </div>
-                  </div>
-                ))}
+          <div className="max-w-3xl">
+            <h2 className="text-3xl font-bold text-sage-900 mb-6">Wat biedt Samen Verder?</h2>
+            <p className="text-lg text-sage-600 leading-relaxed mb-6">
+              Samen Verder koppelt ouders aan een vrijwillige buddy — iemand die luistert, uitlegt en meedenkt. Geen behandelaar, geen jeugdbeschermer, maar een mens naast de ouder.
+            </p>
+            <p className="text-lg text-sage-600 leading-relaxed">
+              Een buddy kan emotionele steun bieden, helpen bij het begrijpen van brieven en besluiten, of een ouder voorbereiden op een gesprek of zitting. Dit vult aan wat u als professional biedt — het vervangt formele hulpverlening niet.
+            </p>
+          </div>
+
+          <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              { title: "Een buddy luistert", text: "Zonder oordeel, zonder agenda. Soms is dat precies wat een ouder nodig heeft naast de formele hulp." },
+              { title: "Een buddy legt uit", text: "Moeilijke taal uit brieven, besluiten of gesprekken vertaald naar begrijpelijke stappen." },
+              { title: "Een buddy denkt mee", text: "Bij de voorbereiding op een zitting, gesprek met de jeugdbeschermer of andere moeilijke momenten." },
+              { title: "Geen behandeling", text: "Een buddy vervangt geen therapie, juridische hulp of jeugdbescherming." },
+              { title: "Geen partij kiezen", text: "Een buddy staat naast de ouder, maar neemt geen standpunt in richting instanties." },
+              { title: "Gratis voor ouders", text: "Er zijn geen kosten verbonden aan het ontvangen van een buddy." },
+            ].map((item, i) => (
+              <div key={i} className={`p-6 rounded-2xl border ${i < 3 ? "bg-primary/5 border-primary/10" : "bg-sage-50 border-sage-100"}`}>
+                <h4 className="font-bold text-sage-900 mb-2">{item.title}</h4>
+                <p className="text-sage-600 text-sm leading-relaxed">{item.text}</p>
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Wanneer verwijzen */}
+      <section className="py-12 md:py-24 bg-sage-50">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="max-w-2xl mb-10">
+            <h2 className="text-3xl font-bold text-sage-900 mb-4">Wanneer doorverwijzen?</h2>
+            <p className="text-lg text-sage-600">
+              Samen Verder is niet voor elke situatie, maar in de volgende gevallen kan een buddy een zinvolle aanvulling zijn op uw werk.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {[
+              "De ouder is overspoeld en kan informatie moeilijk verwerken",
+              "De ouder begrijpt brieven, besluiten of procedures niet goed",
+              "De ouder heeft behoefte aan erkenning naast formele hulp",
+              "De ouder staat er alleen voor en heeft geen steunsysteem",
+              "De ouder heeft wantrouwen richting hulpverlening maar zou wel steun willen",
+              "De ouder moet naar een gesprek of zitting en wil zich voorbereiden",
+              "De ouder ervaart isolement of heeft moeite om overzicht te houden",
+              "U wilt iets bieden naast wat u als professional kunt geven",
+            ].map((item, i) => (
+              <div key={i} className="flex items-start gap-3 bg-white p-5 rounded-2xl border border-sage-100">
+                <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                <p className="text-sage-700 text-sm leading-relaxed">{item}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Hoe werkt doorverwijzen */}
+      <section className="py-12 md:py-24 bg-white">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="max-w-2xl mb-10">
+            <h2 className="text-3xl font-bold text-sage-900 mb-4">Hoe werkt doorverwijzen?</h2>
+            <p className="text-lg text-sage-600">
+              Aanmelden is laagdrempelig. Een ouder kan zichzelf aanmelden, maar u kunt ook samen de aanmelding invullen of de ouder er op wijzen.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              { step: "1", title: "Aanmelden", text: "De ouder meldt zich aan via de website, of u helpt daarbij. Wij nemen binnen 48 uur contact op." },
+              { step: "2", title: "Kennismaking", text: "We luisteren naar de situatie en kijken welke ondersteuning past. Geen ingewikkelde intake." },
+              { step: "3", title: "Koppeling", text: "We zoeken een passende buddy en stellen voor. Het contact kan telefonisch, via de app of fysiek zijn." },
+            ].map((item) => (
+              <div key={item.step} className="flex gap-5">
+                <div className="text-5xl font-black text-primary/10 leading-none shrink-0">{item.step}</div>
+                <div>
+                  <h3 className="text-lg font-bold text-sage-900 mb-2">{item.title}</h3>
+                  <p className="text-sage-600 text-sm leading-relaxed">{item.text}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-12 bg-primary/5 border border-primary/10 rounded-3xl p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+            <div>
+              <h3 className="font-bold text-sage-900 text-lg mb-1">Heeft u vragen of wilt u materiaal ontvangen?</h3>
+              <p className="text-sage-600 text-sm">Posters, visitekaartjes of informatie voor in uw organisatie — neem contact op.</p>
             </div>
-            <div className="bg-sage-50 rounded-3xl p-8 md:p-12 border border-sage-100">
-              <h3 className="text-2xl font-bold text-sage-900 mb-6">Partner worden?</h3>
-              <form className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-sage-700 mb-1">Organisatienaam</label>
-                  <input type="text" className="w-full rounded-xl border border-sage-200 p-3 focus:ring-2 focus:ring-primary focus:outline-none" />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-sage-700 mb-1">E-mailadres</label>
-                  <input type="email" className="w-full rounded-xl border border-sage-200 p-3 focus:ring-2 focus:ring-primary focus:outline-none" />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-sage-700 mb-1">Bericht</label>
-                  <textarea rows={4} className="w-full rounded-xl border border-sage-200 p-3 focus:ring-2 focus:ring-primary focus:outline-none"></textarea>
-                </div>
-                <Button className="w-full">Verstuur Aanvraag</Button>
-              </form>
-            </div>
+            <Button asChild size="lg" className="shrink-0">
+              <Link href="/contact" className="flex items-center gap-2">
+                Contact opnemen <ArrowRight className="h-4 w-4" />
+              </Link>
+            </Button>
           </div>
         </div>
       </section>
 
       <TrustBadgesSection />
 
+      {/* Technologie van */}
       <section className="bg-white py-12 md:py-24 border-t border-sage-100">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
           <div className="flex flex-col items-center">
@@ -111,25 +146,13 @@ export default function ProfessionalsPage() {
               className="h-24 w-auto mb-6"
             />
             <p className="text-sage-600 max-w-xl mb-10">
-              Het Samen Verder platform draait op technologie die ontwikkeld is met focus op veiligheid, toegankelijkheid en gebruiksvriendelijkheid.
+              Het Samen Verder platform draait op technologie ontwikkeld door WebsUp.nl, met focus op veiligheid, toegankelijkheid en gebruiksvriendelijkheid.
             </p>
-            <div className="flex items-center space-x-8 opacity-50 hover:opacity-100 transition-all">
-              <Image
-                src="/images/websup-color.png"
-                alt="WebsUp.nl"
-                width={160}
-                height={64}
-                className="h-14 w-auto"
-              />
+            <div className="flex items-center space-x-8">
+              <Image src="/images/websup-color.png" alt="WebsUp.nl" width={160} height={64} className="h-14 w-auto" />
               <div className="h-8 w-px bg-sage-200" />
               <div className="flex items-center gap-2">
-                <Image
-                  src="/images/favicon en icon voor logo.png"
-                  alt="Samen Verder"
-                  width={36}
-                  height={36}
-                  className="h-9 w-auto rounded-lg"
-                />
+                <Image src="/images/favicon en icon voor logo.png" alt="Samen Verder" width={36} height={36} className="h-9 w-auto rounded-lg" />
                 <div className="text-xl font-bold italic text-sage-900">Samen Verder</div>
               </div>
             </div>
