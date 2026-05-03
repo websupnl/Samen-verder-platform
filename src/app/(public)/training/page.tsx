@@ -14,7 +14,7 @@ const modules = [
   {
     nr: "02",
     title: "Het systeem begrijpen",
-    text: "Uithuisplaatsing, OTS, Raad voor de Kinderbescherming — wat betekent dat allemaal? Je krijgt een helder beeld van de betrokken instanties en procedures.",
+    text: "Uithuisplaatsing, OTS, Raad voor de Kinderbescherming: wat betekent dat allemaal? Je krijgt een helder beeld van de betrokken instanties en procedures.",
   },
   {
     nr: "03",
@@ -34,7 +34,7 @@ const modules = [
   {
     nr: "06",
     title: "Praktijk en terugkoppeling",
-    text: "Via rollenspellen en casusbesprekingen oefen je situaties die je als buddy kunt tegenkomen — en bespreek je die daarna samen.",
+    text: "Via rollenspellen en casusbesprekingen oefen je situaties die je als buddy kunt tegenkomen. Daarna bespreek je die samen.",
   },
 ];
 
@@ -66,7 +66,7 @@ export default function TrainingPage() {
     <div className="flex flex-col w-full">
       <PublicPageHero
         title="Jouw training als buddy"
-        description="Je hoeft het niet alleen uit te zoeken. Voordat je aan de slag gaat als buddy, bereiden we je goed voor — met training, begeleiding en een netwerk van andere buddies."
+        description="Je hoeft het niet alleen uit te zoeken. Voordat je aan de slag gaat als buddy, bereiden we je goed voor: training, begeleiding en een netwerk van andere buddies."
         image="/images/business-meeting-with-handshake-in-a-bright-workpl-2026-01-09-11-36-35-utc.jpg"
         imageAlt="Buddies in training samen"
         imageFullBleed
@@ -91,7 +91,7 @@ export default function TrainingPage() {
                 Ouders in een uithuisplaatsingssituatie bevinden zich in een kwetsbare en complexe positie. Als buddy kom je terecht in gesprekken vol emotie, onduidelijkheid en soms wantrouwen.
               </p>
               <p className="text-lg text-sage-600 leading-relaxed mb-6">
-                De training zorgt dat je weet wat je kunt verwachten, hoe je het beste kunt luisteren en wanneer je een stapje terug moet doen. Dat is goed voor de ouder — maar net zo goed voor jou.
+                De training zorgt dat je weet wat je kunt verwachten, hoe je het beste kunt luisteren en wanneer je een stapje terug moet doen. Dat is goed voor de ouder en net zo goed voor jou.
               </p>
               <p className="text-lg text-sage-600 leading-relaxed">
                 Je hoeft geen professional te zijn. Ervaringsdeskundigheid, empathie en het vermogen om te luisteren zijn vaak waardevoller dan een diploma.
