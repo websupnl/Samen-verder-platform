@@ -34,7 +34,7 @@ export default function HoeWerktHetPage() {
         align="center"
       />
 
-      <section className="py-24">
+      <section className="py-12 md:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="relative">
             {/* Timeline line for desktop */}
@@ -59,7 +59,7 @@ export default function HoeWerktHetPage() {
         </div>
       </section>
 
-      <section className="bg-white py-24 border-t border-sage-100">
+      <section className="bg-white py-12 md:py-24 border-t border-sage-100">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-3xl font-bold text-sage-900">Begeleiding bij elke stap</h2>

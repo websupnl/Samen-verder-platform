@@ -22,9 +22,9 @@ export default function BuddyPage() {
         </Button>
       </PublicPageHero>
 
-      <section className="py-24">
+      <section className="py-12 md:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
+          <div className="text-center mb-8 md:mb-16">
             <h2 className="text-3xl font-bold text-sage-900">Wat doet een buddy?</h2>
             <p className="mt-4 text-lg text-sage-600 max-w-2xl mx-auto">
               Als buddy ben je er voor een ander. Je biedt ondersteuning op basis van
@@ -70,7 +70,7 @@ export default function BuddyPage() {
       </section>
 
       {/* Split image + tekst sectie */}
-      <section className="py-24 bg-sage-50">
+      <section className="py-12 md:py-24 bg-sage-50">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="relative h-96 rounded-3xl overflow-hidden shadow-xl">
@@ -107,7 +107,7 @@ export default function BuddyPage() {
 
       <TrustBadgesSection />
 
-      <section className="bg-sage-50 py-24">
+      <section className="bg-sage-50 py-12 md:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="bg-white rounded-3xl p-8 md:p-16 shadow-sm border border-sage-100">
             <h2 className="text-3xl font-bold text-sage-900 mb-8">Veelgestelde vragen voor buddies</h2>
