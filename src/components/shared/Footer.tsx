@@ -102,7 +102,7 @@ export const Footer = () => {
             alt="WebsUp.nl"
             width={80}
             height={28}
-            className="h-7 w-auto"
+            className="h-12 w-auto"
           />
         </a>
       </div>
