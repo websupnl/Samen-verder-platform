@@ -11,8 +11,8 @@ export default function OudersPage() {
       <PublicPageHero
         title="U bent niet alleen"
         description="Als ouder staat u er soms alleen voor. Samen Verder biedt een warme plek waar u ondersteuning kunt vinden van iemand die er echt voor u is."
-        image="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=1400"
-        imageAlt="Ouder in een rustige, warme omgeving"
+        image="/images/family-relaxes-together-on-living-room-floor-2026-03-24-23-54-56-utc.jpg"
+        imageAlt="Gezin dat ontspannen samen is"
         imageFullBleed
       >
         <Button asChild size="lg">
@@ -20,7 +20,7 @@ export default function OudersPage() {
         </Button>
       </PublicPageHero>
 
-      <section className="py-24">
+      <section className="py-12 md:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
@@ -106,7 +106,7 @@ export default function OudersPage() {
         </div>
       </section>
 
-      <section className="bg-white py-24">
+      <section className="bg-white py-12 md:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold text-sage-900">Klaar om contact te maken?</h2>
           <p className="mt-4 text-lg text-sage-600 max-w-2xl mx-auto">
